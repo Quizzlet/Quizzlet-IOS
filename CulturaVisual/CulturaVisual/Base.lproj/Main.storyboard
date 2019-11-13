@@ -446,8 +446,8 @@
                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Respuesta 1"/>
                                 <connections>
-                                    <action selector="incorrecta3:" destination="aru-Gu-30L" eventType="touchUpInside" id="cQf-z0-PEL"/>
-                                    <segue destination="NUQ-XO-LrI" kind="show" id="bad-Dr-kcJ"/>
+                                    <action selector="seleccionar2:" destination="aru-Gu-30L" eventType="touchUpInside" id="PD6-bj-43A"/>
+                                    <segue destination="NUQ-XO-LrI" kind="show" identifier="resp1" id="bad-Dr-kcJ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPm-a0-UJZ">
@@ -458,8 +458,8 @@
                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Respuesta 4"/>
                                 <connections>
-                                    <action selector="incorrecta:" destination="aru-Gu-30L" eventType="touchUpInside" id="32Q-06-U3R"/>
-                                    <segue destination="NUQ-XO-LrI" kind="show" id="7km-XN-N3J"/>
+                                    <action selector="seleccionar4:" destination="aru-Gu-30L" eventType="touchUpInside" id="bo2-fF-LiQ"/>
+                                    <segue destination="NUQ-XO-LrI" kind="show" identifier="resp4" id="7km-XN-N3J"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOU-xc-eFJ">
@@ -470,8 +470,8 @@
                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Respuesta 2"/>
                                 <connections>
-                                    <action selector="incorrecta2:" destination="aru-Gu-30L" eventType="touchUpInside" id="2cp-hn-V9q"/>
-                                    <segue destination="NUQ-XO-LrI" kind="show" id="O6A-50-Ljg"/>
+                                    <action selector="seleccionar:" destination="aru-Gu-30L" eventType="touchUpInside" id="YX5-Na-1n3"/>
+                                    <segue destination="NUQ-XO-LrI" kind="show" identifier="resp2" id="O6A-50-Ljg"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="preguntas" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fb4-WR-ig6">
@@ -482,8 +482,8 @@
                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Respuesta 3"/>
                                 <connections>
-                                    <action selector="correcta:" destination="aru-Gu-30L" eventType="touchUpInside" id="aE0-ly-hnt"/>
-                                    <segue destination="NUQ-XO-LrI" kind="show" id="HyK-PQ-cgj"/>
+                                    <action selector="seleccionar3:" destination="aru-Gu-30L" eventType="touchUpInside" id="6AO-NE-8Vx"/>
+                                    <segue destination="NUQ-XO-LrI" kind="show" identifier="resp3" id="HyK-PQ-cgj"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pregunta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofW-cj-brD">
@@ -521,7 +521,6 @@
         <!--Navigation Controller-->
         <scene sceneID="Af8-ee-FbE">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OmV-OR-LJB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="15q-cg-jHZ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Uii-g1-VMP"/>
@@ -534,6 +533,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="akE-Kt-uT1"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OmV-OR-LJB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2759.1999999999998" y="126.38680659670166"/>
         </scene>
@@ -623,6 +623,6 @@
         <image name="usuario" width="225" height="225"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7km-XN-N3J"/>
+        <segue reference="bad-Dr-kcJ"/>
     </inferredMetricsTieBreakers>
 </document>
