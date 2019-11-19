@@ -16,13 +16,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Login" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvh-nk-doQ">
-                                <rect key="frame" x="92" y="131" width="190" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="40"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mE6-g9-gsH">
                                 <rect key="frame" x="161" y="318" width="171" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -73,13 +66,25 @@
                                     <segue destination="v1w-vo-aIP" kind="show" id="eHx-wO-TwQ"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Login" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvh-nk-doQ">
+                                <rect key="frame" x="118" y="132" width="139" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.90076392890000001" green="0.90120279790000002" blue="0.98738354439999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="ib5-Gz-7sO"/>
                     </view>
                     <navigationItem key="navigationItem" id="mfn-Xr-90H"/>
                     <connections>
+                        <outlet property="btLogIn" destination="R8L-qh-E3o" id="DCN-a2-hkl"/>
+                        <outlet property="btSignUp" destination="5fk-Jb-ZUo" id="f6K-YX-k8f"/>
+                        <outlet property="lbContra" destination="RUJ-aC-gsc" id="5YS-zG-p50"/>
+                        <outlet property="lbCorreo" destination="FGQ-qo-bWJ" id="X8A-9a-h6Z"/>
                         <outlet property="lbEmail" destination="mE6-g9-gsH" id="UvD-4g-W81"/>
+                        <outlet property="lbLoging" destination="dvh-nk-doQ" id="Ath-qs-nfp"/>
                         <outlet property="lbPassword" destination="1oM-3L-jEM" id="6vT-eN-tuW"/>
                     </connections>
                 </viewController>
@@ -236,6 +241,12 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="UNx-B7-M3q"/>
+                    <connections>
+                        <outlet property="btCreditos" destination="VJt-ow-APc" id="rcS-gh-zPg"/>
+                        <outlet property="btPerfil" destination="HfI-sJ-bqb" id="XcB-i8-h85"/>
+                        <outlet property="btTemas" destination="AVo-Df-3w6" id="0tT-kG-hrU"/>
+                        <outlet property="lbQuizzlet" destination="LQR-qK-nlJ" id="Qgi-pe-ACx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -309,6 +320,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="gne-Zk-feJ"/>
                     <connections>
+                        <outlet property="lbTemas" destination="yH0-fu-T2G" id="N91-ki-wBy"/>
                         <outlet property="tableView" destination="gee-Uc-UsV" id="hxd-7c-FXz"/>
                     </connections>
                 </viewController>
@@ -417,6 +429,7 @@
                     <navigationItem key="navigationItem" id="LIZ-DN-SJb"/>
                     <connections>
                         <outlet property="lbQuiz" destination="VUe-TS-OWt" id="uj1-JU-cs9"/>
+                        <outlet property="tableView" destination="Tdk-NH-bRZ" id="RNN-k0-BVY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6uS-hN-ad7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -446,8 +459,8 @@
                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Respuesta 1"/>
                                 <connections>
-                                    <action selector="incorrecta3:" destination="aru-Gu-30L" eventType="touchUpInside" id="cQf-z0-PEL"/>
-                                    <segue destination="NUQ-XO-LrI" kind="show" id="bad-Dr-kcJ"/>
+                                    <action selector="seleccionar2:" destination="aru-Gu-30L" eventType="touchUpInside" id="PD6-bj-43A"/>
+                                    <segue destination="NUQ-XO-LrI" kind="show" identifier="resp1" id="bad-Dr-kcJ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPm-a0-UJZ">
@@ -458,8 +471,8 @@
                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Respuesta 4"/>
                                 <connections>
-                                    <action selector="incorrecta:" destination="aru-Gu-30L" eventType="touchUpInside" id="32Q-06-U3R"/>
-                                    <segue destination="NUQ-XO-LrI" kind="show" id="7km-XN-N3J"/>
+                                    <action selector="seleccionar4:" destination="aru-Gu-30L" eventType="touchUpInside" id="bo2-fF-LiQ"/>
+                                    <segue destination="NUQ-XO-LrI" kind="show" identifier="resp4" id="7km-XN-N3J"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOU-xc-eFJ">
@@ -470,8 +483,8 @@
                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Respuesta 2"/>
                                 <connections>
-                                    <action selector="incorrecta2:" destination="aru-Gu-30L" eventType="touchUpInside" id="2cp-hn-V9q"/>
-                                    <segue destination="NUQ-XO-LrI" kind="show" id="O6A-50-Ljg"/>
+                                    <action selector="seleccionar:" destination="aru-Gu-30L" eventType="touchUpInside" id="YX5-Na-1n3"/>
+                                    <segue destination="NUQ-XO-LrI" kind="show" identifier="resp2" id="O6A-50-Ljg"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="preguntas" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fb4-WR-ig6">
@@ -482,8 +495,8 @@
                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Respuesta 3"/>
                                 <connections>
-                                    <action selector="correcta:" destination="aru-Gu-30L" eventType="touchUpInside" id="aE0-ly-hnt"/>
-                                    <segue destination="NUQ-XO-LrI" kind="show" id="HyK-PQ-cgj"/>
+                                    <action selector="seleccionar3:" destination="aru-Gu-30L" eventType="touchUpInside" id="6AO-NE-8Vx"/>
+                                    <segue destination="NUQ-XO-LrI" kind="show" identifier="resp3" id="HyK-PQ-cgj"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pregunta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofW-cj-brD">
@@ -521,7 +534,6 @@
         <!--Navigation Controller-->
         <scene sceneID="Af8-ee-FbE">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OmV-OR-LJB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="15q-cg-jHZ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Uii-g1-VMP"/>
@@ -534,6 +546,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="akE-Kt-uT1"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OmV-OR-LJB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2759.1999999999998" y="126.38680659670166"/>
         </scene>
@@ -623,6 +636,6 @@
         <image name="usuario" width="225" height="225"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7km-XN-N3J"/>
+        <segue reference="bad-Dr-kcJ"/>
     </inferredMetricsTieBreakers>
 </document>

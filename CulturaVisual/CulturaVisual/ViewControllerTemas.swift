@@ -13,9 +13,12 @@ class ViewControllerTemas: UIViewController, UITableViewDataSource, UITableViewD
     var listaTemas = ["Arquitectura", "Arte", "Diseño"]
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var lbTemas: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupLayout()
 
         title = "Temas"
         // Do any additional setup after loading the view.
@@ -48,4 +51,19 @@ class ViewControllerTemas: UIViewController, UITableViewDataSource, UITableViewD
 
         }
 
+    func setupLayout() {
+        
+        lbTemas.translatesAutoresizingMaskIntoConstraints = false
+    tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        //Constrains del label Temas
+        lbTemas.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        lbTemas.topAnchor.constraint(equalTo: view.topAnchor, constant: 170).isActive = true
+        
+        //Constraions del table view
+        tableView.topAnchor.constraint(equalTo: lbTemas.bottomAnchor, constant: 80).isActive = true
+        tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        tableView.widthAnchor.constraint(equalToConstant: 343).isActive = true
+    tableView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+    }
 }

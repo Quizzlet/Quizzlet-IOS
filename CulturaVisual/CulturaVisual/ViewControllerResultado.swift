@@ -29,7 +29,7 @@ class ViewControllerResultado: UIViewController, UITableViewDelegate, UITableVie
         //Animacion de pulso de fondo
         pulsatingLayer = CAShapeLayer()
         pulsatingLayer.path = circularPath.cgPath
-        pulsatingLayer.strokeColor = #colorLiteral(red: 0.7115578055, green: 0.2551895976, blue: 0.2722187638, alpha: 1)
+        pulsatingLayer.strokeColor = #colorLiteral(red: 0.9808917642, green: 0.614590168, blue: 0.6713882089, alpha: 1)
         pulsatingLayer.lineWidth = 10
         pulsatingLayer.fillColor = UIColor.clear.cgColor
         pulsatingLayer.lineCap = .round
@@ -61,7 +61,7 @@ class ViewControllerResultado: UIViewController, UITableViewDelegate, UITableVie
         
         // Crea la animacion del circulo
         let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        basicAnimation.toValue = 1
+        basicAnimation.toValue = 0.9
         basicAnimation.duration = 2
         basicAnimation.fillMode = .forwards
         basicAnimation.isRemovedOnCompletion = false

@@ -31,28 +31,42 @@ class ViewControllerSingUp: UIViewController {
             let strPassword = lbPassword.text,
             let strConfirmPassword = lbConfirmPassword.text {
             
-            UserAPI.shared.Singup(
-                strMatricula: strMatricula,
-                strName: strName,
-                strEmail: strEmail,
-                strPassword: strPassword
-            ) { (res) in
-                switch res {
-                case .failure(let err as NSError):
-                    if(
-                        //Client error
-                        err.code >= 400 &&
-                        err.code < 600
-                        ){
-                     print(err.code, err.userInfo["message"]! )
-                    } else {
-                        print(err.localizedDescription)
-                    }
-                case .success(let res):
-                    print(res)
-                }
+            if strName == "" || strMatricula == "" || strEmail == "" || strPassword == "" || strConfirmPassword == "" {
+                let alerta = UIAlertController(title: "Error", message: "Ingresa todos los datos solicitados", preferredStyle: .alert)
+                let accion = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alerta.addAction(accion)
+                present(alerta, animated: true, completion: nil)
             }
-            
+            else if strPassword != strConfirmPassword{
+                let alerta = UIAlertController(title: "Error", message: "Las contraseñas no coinciden", preferredStyle: .alert)
+                let accion = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alerta.addAction(accion)
+                present(alerta, animated: true, completion: nil)
+            }
+            else{
+                UserAPI.shared.Singup(
+                    strMatricula: strMatricula,
+                    strName: strName,
+                    strEmail: strEmail,
+                    strPassword: strPassword
+                ) { (res) in
+                    switch res {
+                    case .failure(let err as NSError):
+                        if(
+                            //Client error
+                            err.code >= 400 &&
+                            err.code < 600
+                            ){
+                         print(err.code, err.userInfo["message"]! )
+                        } else {
+                            print(err.localizedDescription)
+                        }
+                    case .success(let res):
+                        print(res)
+                    }
+                }
+                navigationController?.popToRootViewController(animated: true)
+            }
         }
     }
     

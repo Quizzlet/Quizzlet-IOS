@@ -14,7 +14,7 @@ class UserAPI: NSObject {
     static let shared = UserAPI()
     
     public static var BaseURL =
-        "http://127.0.0.1:3000/api/users";
+        "https://quizzlet.herokuapp.com/api/users";
     
     //MARK: - Login
     //------------------------------------------------------
@@ -214,4 +214,14 @@ class UserAPI: NSObject {
     }
 
 }
+
+
+//MARK: - Quizzes
+//------------------------------------------------------
+
+
+
+
+
+
 //==========================================================
