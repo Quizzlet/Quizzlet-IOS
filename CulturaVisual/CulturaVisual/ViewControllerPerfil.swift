@@ -10,6 +10,11 @@ import UIKit
 
 class ViewControllerPerfil: UIViewController {
     
+    @IBOutlet weak var lbName: UILabel!
+    @IBOutlet weak var lbMatricula: UILabel!
+    
+    var UserData: User!
+    
     //------------------------------------------------------
     func dataFileUrl() -> URL {
         let url = FileManager().urls(
@@ -25,7 +30,8 @@ class ViewControllerPerfil: UIViewController {
     //------------------------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        lbName.text = UserData.strName
+        lbMatricula.text = UserData.strMatricula
         // Do any additional setup after loading the view.
     }
     

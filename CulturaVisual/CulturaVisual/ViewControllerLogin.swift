@@ -31,14 +31,12 @@ class ViewControllerLogin: UIViewController {
         )
         return pathArchivo
     }
-
     
     //------------------------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLayout()
         getUser()
-        print(UserData)
         if(UserData != nil) {
             performSegue(withIdentifier: "Success", sender: nil)
         }
@@ -136,6 +134,7 @@ class ViewControllerLogin: UIViewController {
            print("Save Failed")
         }
     }
+    
     //------------------------------------------------------
     func getUser() {
         do {

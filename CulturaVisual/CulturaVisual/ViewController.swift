@@ -16,12 +16,50 @@ class ViewController: UIViewController {
     @IBOutlet weak var btPerfil: UIButton!
     @IBOutlet weak var btCreditos: UIButton!
     
+    var UserData: User!
+    
+    //------------------------------------------------------
+    func dataFileUrl() -> URL {
+        let url = FileManager().urls(
+            for: .documentDirectory,
+            in: .userDomainMask
+        ).first!
+        let pathArchivo = url.appendingPathComponent(
+            "Quizzlet.plist"
+        )
+        return pathArchivo
+    }
+    
+    //------------------------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLayout()
-        // Do any additional setup after loading the view.
+        getUser()
+    }
+    
+    // MARK: - Navigation
+    //------------------------------------------------------
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "Perfil") {
+            let PerfilView = segue.destination as! ViewControllerPerfil
+            PerfilView.UserData = UserData
+        }
+    }
+    
+    // MARK: - Persistance
+    //------------------------------------------------------
+    func getUser() {
+        do {
+            let data = try Data.init(contentsOf: dataFileUrl())
+            UserData = try PropertyListDecoder().decode(User.self, from: data)
+        }
+        catch {
+            print("Error reading or decoding file")
+        }
     }
 
+    // MARK: - Layout
+    //------------------------------------------------------
     func setUpLayout(){
         
         // Activa los constrains
