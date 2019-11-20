@@ -26,9 +26,10 @@ class ViewControllerResultado: UIViewController, UITableViewDelegate, UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    self.navigationController?.isNavigationBarHidden = true
         setUpLayout()
         
-        let center = CGPoint(x: self.view.bounds.midX, y: 280)
+        let center = CGPoint(x: self.view.bounds.midX, y: 260)
         
         let trackLayer = CAShapeLayer()
         let circularPath = UIBezierPath(arcCenter: .zero, radius: 90, startAngle: -CGFloat.pi / 2, endAngle: 2 * CGFloat.pi, clockwise: true)
@@ -79,6 +80,8 @@ class ViewControllerResultado: UIViewController, UITableViewDelegate, UITableVie
     view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
         
     }
+    //MARK:- Funcion de la animacion
+    //===============================================
     func animatedPulsatingLAyer() {
         let animation = CABasicAnimation(keyPath: "transform.scale")
         
@@ -105,15 +108,18 @@ class ViewControllerResultado: UIViewController, UITableViewDelegate, UITableVie
         
         cell.textLabel?.text = top5[indexPath.row]
         
-        
         return cell
 
     }
     
+    // MARK:- Constrains
+    //=============================
     func setUpLayout(){
         
+        //
         lbRes.translatesAutoresizingMaskIntoConstraints = false
-        lbCalificacion.translatesAutoresizingMaskIntoConstraints = false
+    lbCalificacion.translatesAutoresizingMaskIntoConstraints = false
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         lbTop.translatesAutoresizingMaskIntoConstraints = false
         
@@ -123,7 +129,7 @@ class ViewControllerResultado: UIViewController, UITableViewDelegate, UITableVie
         lbRes.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         //Constrains label calificacion
-        lbCalificacion.topAnchor.constraint(equalTo: lbRes.bottomAnchor, constant: 150).isActive = true
+        lbCalificacion.topAnchor.constraint(equalTo: lbRes.bottomAnchor, constant: 140).isActive = true
         lbCalificacion.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         //Constrains del tableview
