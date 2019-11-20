@@ -33,8 +33,7 @@ class ViewController: UIViewController {
         //Constrains del label
         lbQuizzlet.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         lbQuizzlet.topAnchor.constraint(equalTo: view.topAnchor, constant: 170).isActive = true
-//        lbQuizzlet.widthAnchor.constraint(equalToConstant: 170).isActive = true
-//        lbQuizzlet.heightAnchor.constraint(equalToConstant: 70).isActive = true
+
         
         
         //Constrains del boton Temas
