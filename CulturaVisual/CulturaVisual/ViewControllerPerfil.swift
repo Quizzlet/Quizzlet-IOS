@@ -9,14 +9,37 @@
 import UIKit
 
 class ViewControllerPerfil: UIViewController {
+    
+    //------------------------------------------------------
+    func dataFileUrl() -> URL {
+        let url = FileManager().urls(
+            for: .documentDirectory,
+            in: .userDomainMask
+        ).first!
+        let pathArchivo = url.appendingPathComponent(
+            "Quizzlet.plist"
+        )
+        return pathArchivo
+    }
 
+    //------------------------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
-
+    //------------------------------------------------------
+    @IBAction func LogOut(_ sender: UIButton) {
+        do {
+            if FileManager.default.fileExists(atPath: dataFileUrl().path) {
+                try FileManager.default.removeItem(atPath: dataFileUrl().path)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

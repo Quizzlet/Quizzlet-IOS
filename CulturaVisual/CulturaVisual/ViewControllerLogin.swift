@@ -38,6 +38,7 @@ class ViewControllerLogin: UIViewController {
         super.viewDidLoad()
         setUpLayout()
         getUser()
+        print(UserData)
         if(UserData != nil) {
             performSegue(withIdentifier: "Success", sender: nil)
         }
