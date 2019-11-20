@@ -18,7 +18,10 @@ class ViewControllerPregunta: UIViewController {
     @IBOutlet weak var lbNum: UILabel!
     @IBOutlet weak var lbPregunta: UILabel!
     @IBOutlet weak var lbPreg: UILabel!
+    @IBOutlet weak var lbTimer: UILabel!
     
+    var seconds = 30
+    var timer = Timer()
     var cont = 0
     var listaPreguntas : [String]!
     var listaRespuestas : [String]!
@@ -30,8 +33,8 @@ class ViewControllerPregunta: UIViewController {
     
     override func viewDidLoad() {
            super.viewDidLoad()
-            newQuestion()
            setUpLayout()
+        newQuestion()
        }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -62,6 +65,7 @@ class ViewControllerPregunta: UIViewController {
     }
 
     @IBAction func seleccionar(_ sender: Any) {
+        timer.invalidate()
         let respuestabt = bt2.currentTitle
         var resCorrecta : String!
         
@@ -113,6 +117,7 @@ class ViewControllerPregunta: UIViewController {
     }
     
     @IBAction func seleccionar2(_ sender: Any) {
+        timer.invalidate()
         let respuestabt = bt1.currentTitle
         var resCorrecta : String!
         switch cont {
@@ -164,6 +169,7 @@ class ViewControllerPregunta: UIViewController {
     
     
     @IBAction func seleccionar3(_ sender: Any) {
+        timer.invalidate()
         let respuestabt = bt3.currentTitle
         var resCorrecta : String!
         switch cont {
@@ -212,6 +218,7 @@ class ViewControllerPregunta: UIViewController {
     }
     
     @IBAction func seleccionar4(_ sender: Any) {
+        timer.invalidate()
         let respuestabt = bt4.currentTitle
         var resCorrecta : String!
         switch cont {
@@ -255,7 +262,28 @@ class ViewControllerPregunta: UIViewController {
         }
     }
     
+    @objc func counter(){
+        seconds -= 1
+        lbTimer.text = String(seconds)
+        
+        if seconds == 0{
+            if cont < 3{
+                cont += 1
+                timer.invalidate()
+                newQuestion()
+            }
+            else{
+                timer.invalidate()
+            }
+            
+        }
+        
+    }
+    
     func newQuestion(){
+        seconds = 30
+        lbTimer.text = String(seconds)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(counter), userInfo: nil, repeats: true)
         listaPreguntas = ["Cuanto es 2 + 2", "Cuanto es 3 + 3?", "Cuanto es 4 * 4?", "Cuanto es 5 - 3?"]
         listaRespuestas = ["4", "6", "16", "2"]
         listaRespuestas2 = ["4", "6", "16", "2"]
@@ -286,7 +314,8 @@ class ViewControllerPregunta: UIViewController {
         if cont < 3{
             return false
         }
-            return true
+        return true
+            
     }
     
     // MARK: - Navigation
@@ -308,14 +337,15 @@ class ViewControllerPregunta: UIViewController {
     bt2.translatesAutoresizingMaskIntoConstraints = false
     bt3.translatesAutoresizingMaskIntoConstraints = false
     bt4.translatesAutoresizingMaskIntoConstraints = false
+        lbTimer.translatesAutoresizingMaskIntoConstraints = false
         
         
         //Constrains del label Preg
-        lbPreg.topAnchor.constraint(equalTo: view.topAnchor, constant: 140).isActive = true
+        lbPreg.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
     lbPreg.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         //Constrains label cont
-        lbNum.topAnchor.constraint(equalTo: view.topAnchor, constant: 140).isActive = true
+        lbNum.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
         lbNum.leftAnchor.constraint(equalTo: lbPreg.rightAnchor, constant: 20).isActive = true
         
         //Constrains del label pregunta
@@ -349,6 +379,10 @@ class ViewControllerPregunta: UIViewController {
         bt4.leftAnchor.constraint(equalTo: view.centerXAnchor, constant: 20).isActive = true
         bt4.widthAnchor.constraint(equalToConstant: 143).isActive = true
         bt4.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        //Constrains del timer
+        lbTimer.topAnchor.constraint(equalTo: bt4.bottomAnchor, constant: 40).isActive = true
+        lbTimer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
     }
     
