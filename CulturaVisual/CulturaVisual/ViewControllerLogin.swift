@@ -19,12 +19,28 @@ class ViewControllerLogin: UIViewController {
     @IBOutlet weak var btSignUp: UIButton!
     
     var UserData: User!
+    
+    //------------------------------------------------------
+    func dataFileUrl() -> URL {
+        let url = FileManager().urls(
+            for: .documentDirectory,
+            in: .userDomainMask
+        ).first!
+        let pathArchivo = url.appendingPathComponent(
+            "Quizzlet.plist"
+        )
+        return pathArchivo
+    }
 
     
     //------------------------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLayout()
+        getUser()
+        if(UserData != nil) {
+            performSegue(withIdentifier: "Success", sender: nil)
+        }
     }
     
     //------------------------------------------------------
@@ -66,6 +82,7 @@ class ViewControllerLogin: UIViewController {
                         
                     case .success(let user):
                         self.UserData = user
+                        self.saveUserData()
                         self.performSegue(
                             withIdentifier: "Success",
                             sender: nil
@@ -83,7 +100,7 @@ class ViewControllerLogin: UIViewController {
             
         }
     }
-    
+        
     //------------------------------------------------------
     func showAlert(
         strType: String,
@@ -107,7 +124,29 @@ class ViewControllerLogin: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    //MARK: - Persistance
+    //------------------------------------------------------
+    func saveUserData() {
+        do {
+            let data = try PropertyListEncoder().encode(UserData)
+           try data.write(to: dataFileUrl())
+        }
+        catch {
+           print("Save Failed")
+        }
+    }
+    //------------------------------------------------------
+    func getUser() {
+        do {
+            let data = try Data.init(contentsOf: dataFileUrl())
+            UserData = try PropertyListDecoder().decode(User.self, from: data)
+        }
+        catch {
+            print("Error reading or decoding file")
+        }
+    }
     
+    //MARK: - Navigation
     //------------------------------------------------------
     override func shouldPerformSegue(
         withIdentifier identifier: String,
@@ -176,15 +215,5 @@ class ViewControllerLogin: UIViewController {
     @IBAction func quitarTeclado(_ sender: Any) {
         view.endEditing(true)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
