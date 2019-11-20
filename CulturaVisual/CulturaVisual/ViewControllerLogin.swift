@@ -107,6 +107,11 @@ class ViewControllerLogin: UIViewController {
         btSignUp.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
     }
+    
+    @IBAction func quitarTeclado(_ sender: Any) {
+        view.endEditing(true)
+    }
+    
     /*
     // MARK: - Navigation
 

@@ -17,6 +17,8 @@ class ViewControllerPregunta: UIViewController {
     @IBOutlet weak var bt4: UIButton!
     @IBOutlet weak var lbNum: UILabel!
     @IBOutlet weak var lbPregunta: UILabel!
+    @IBOutlet weak var lbPreg: UILabel!
+    
     var cont = 0
     var listaPreguntas : [String]!
     var listaRespuestas : [String]!
@@ -29,6 +31,7 @@ class ViewControllerPregunta: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         newQuestion()
+        setUpLayout()
     }
     
     
@@ -84,11 +87,21 @@ class ViewControllerPregunta: UIViewController {
             let generator = UINotificationFeedbackGenerator()
             generator.notificationOccurred(.error)
         }
+        bt1.isEnabled = false
+        bt2.isEnabled = false
+        bt3.isEnabled = false
+        bt4.isEnabled = false
+        
         cont += 1
-        print("Antes")
+//        print("Antes")
         //Delay para mostrar la siguiente pregunta
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-            print("Despues de 5 seg")
+            self.bt1.isEnabled = true
+            self.bt2.isEnabled = true
+            self.bt3.isEnabled = true
+            self.bt4.isEnabled = true
+            
+//            print("Despues de 5 seg")
             if self.cont < 4 {
                 self.newQuestion()
             }
@@ -126,11 +139,19 @@ class ViewControllerPregunta: UIViewController {
             let generator = UINotificationFeedbackGenerator()
             generator.notificationOccurred(.error)
         }
+        bt1.isEnabled = false
+        bt2.isEnabled = false
+        bt3.isEnabled = false
+        bt4.isEnabled = false
         cont += 1
         
-        print("Antes")
+//        print("Antes")
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-            print("Despues de 5 seg")
+            self.bt1.isEnabled = true
+            self.bt2.isEnabled = true
+            self.bt3.isEnabled = true
+            self.bt4.isEnabled = true
+//            print("Despues de 5 seg")
             if self.cont < 4 {
                 self.newQuestion()
             }
@@ -169,10 +190,18 @@ class ViewControllerPregunta: UIViewController {
             let generator = UINotificationFeedbackGenerator()
             generator.notificationOccurred(.error)
         }
-        print("Antes")
+//        print("Antes")
+        bt1.isEnabled = false
+        bt2.isEnabled = false
+        bt3.isEnabled = false
+        bt4.isEnabled = false
         cont += 1
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-            print("Despues de 5 seg")
+            self.bt1.isEnabled = true
+            self.bt2.isEnabled = true
+            self.bt3.isEnabled = true
+            self.bt4.isEnabled = true
+//            print("Despues de 5 seg")
             if self.cont < 4 {
                 self.newQuestion()
             }
@@ -197,8 +226,8 @@ class ViewControllerPregunta: UIViewController {
             break;
         }
         
-        print(resCorrecta!)
-        print(respuestabt!)
+//        print(resCorrecta!)
+//        print(respuestabt!)
         
         if respuestabt == resCorrecta{
             bt4.layer.backgroundColor = UIColor.green.withAlphaComponent(0.5).cgColor
@@ -210,10 +239,18 @@ class ViewControllerPregunta: UIViewController {
             let generator = UINotificationFeedbackGenerator()
             generator.notificationOccurred(.error)
         }
-        print("Antes")
+        bt1.isEnabled = false
+        bt2.isEnabled = false
+        bt3.isEnabled = false
+        bt4.isEnabled = false
+//        print("Antes")
         cont += 1
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-            print("Despues de 2.5 seg")
+            self.bt1.isEnabled = true
+            self.bt2.isEnabled = true
+            self.bt3.isEnabled = true
+            self.bt4.isEnabled = true
+//            print("Despues de 2.5 seg")
             if self.cont < 4 {
                 self.newQuestion()
             }
@@ -260,6 +297,59 @@ class ViewControllerPregunta: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+    }
+    
+    func setUpLayout(){
+        
+    lbNum.translatesAutoresizingMaskIntoConstraints = false
+    lbPreg.translatesAutoresizingMaskIntoConstraints = false
+    lbPregunta.translatesAutoresizingMaskIntoConstraints = false
+    bt1.translatesAutoresizingMaskIntoConstraints = false
+    bt2.translatesAutoresizingMaskIntoConstraints = false
+    bt3.translatesAutoresizingMaskIntoConstraints = false
+    bt4.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        //Constrains del label Preg
+        lbPreg.topAnchor.constraint(equalTo: view.topAnchor, constant: 140).isActive = true
+    lbPreg.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        //Constrains label cont
+        lbNum.topAnchor.constraint(equalTo: view.topAnchor, constant: 140).isActive = true
+        lbNum.leftAnchor.constraint(equalTo: lbPreg.rightAnchor, constant: 20).isActive = true
+        
+        //Constrains del label pregunta
+        lbPregunta.topAnchor.constraint(equalTo: lbPreg.bottomAnchor, constant: 15).isActive = true
+        lbPregunta.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        lbPregunta.widthAnchor.constraint(equalToConstant: 263).isActive = true
+        lbPregunta.heightAnchor.constraint(equalToConstant: 180).isActive = true
+        
+        //Constrains del boton 1
+        bt1.topAnchor.constraint(equalTo: lbPregunta.bottomAnchor, constant: 20).isActive = true
+        bt1.rightAnchor.constraint(equalTo: view.centerXAnchor, constant: -20).isActive = true
+        bt1.widthAnchor.constraint(equalToConstant: 143).isActive = true
+        bt1.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        
+        //Constrains del boton 2
+        bt2.topAnchor.constraint(equalTo: lbPregunta.bottomAnchor, constant: 20).isActive = true
+        bt2.leftAnchor.constraint(equalTo: view.centerXAnchor, constant: 20).isActive = true
+    bt2.widthAnchor.constraint(equalToConstant: 143).isActive = true
+    bt2.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        //Constrains del boton 3
+        bt3.topAnchor.constraint(equalTo: bt1.bottomAnchor, constant: 20).isActive = true
+        bt3.rightAnchor.constraint(equalTo: view.centerXAnchor, constant: -20).isActive = true
+        bt3.widthAnchor.constraint(equalToConstant: 143).isActive = true
+        bt3.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        //Constrains del boton 4
+        bt4.topAnchor.constraint(equalTo: bt2.bottomAnchor, constant: 20).isActive = true
+        bt4.leftAnchor.constraint(equalTo: view.centerXAnchor, constant: 20).isActive = true
+        bt4.widthAnchor.constraint(equalToConstant: 143).isActive = true
+        bt4.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
     }
     
 

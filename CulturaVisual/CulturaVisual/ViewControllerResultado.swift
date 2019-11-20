@@ -14,22 +14,29 @@ class ViewControllerResultado: UIViewController, UITableViewDelegate, UITableVie
     
     var pulsatingLayer : CAShapeLayer!
 
-    @IBOutlet weak var lbCali: UILabel!
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var lbCalificacion: UILabel!
+    @IBOutlet weak var lbRes: UILabel!
+    
+    @IBOutlet weak var lbTop: UILabel!
+    
     
     var top5 = ["Ana", "Maggie", "Angel", "Noe", "Mariana"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpLayout()
         
-        let center = CGPoint(x: self.view.bounds.midX, y: 250)
+        let center = CGPoint(x: self.view.bounds.midX, y: 280)
         
         let trackLayer = CAShapeLayer()
-        let circularPath = UIBezierPath(arcCenter: .zero, radius: 100, startAngle: -CGFloat.pi / 2, endAngle: 2 * CGFloat.pi, clockwise: true)
+        let circularPath = UIBezierPath(arcCenter: .zero, radius: 90, startAngle: -CGFloat.pi / 2, endAngle: 2 * CGFloat.pi, clockwise: true)
         
         //Animacion de pulso de fondo
         pulsatingLayer = CAShapeLayer()
         pulsatingLayer.path = circularPath.cgPath
-        pulsatingLayer.strokeColor = #colorLiteral(red: 0.9808917642, green: 0.614590168, blue: 0.6713882089, alpha: 1)
+        pulsatingLayer.strokeColor = #colorLiteral(red: 0.6328135729, green: 0.7647476196, blue: 0.9493692517, alpha: 1)
         pulsatingLayer.lineWidth = 10
         pulsatingLayer.fillColor = UIColor.clear.cgColor
         pulsatingLayer.lineCap = .round
@@ -50,7 +57,7 @@ class ViewControllerResultado: UIViewController, UITableViewDelegate, UITableVie
         
         // Circulo animado
         shapeLayer.path = circularPath.cgPath
-        shapeLayer.strokeColor = UIColor.red.cgColor
+        shapeLayer.strokeColor = #colorLiteral(red: 0.2619800568, green: 0.5278556943, blue: 0.8930467367, alpha: 1)
         shapeLayer.lineWidth = 18
         shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.lineCap = .round
@@ -67,7 +74,7 @@ class ViewControllerResultado: UIViewController, UITableViewDelegate, UITableVie
         basicAnimation.isRemovedOnCompletion = false
         shapeLayer.add(basicAnimation, forKey: "basic")
         
-        view.addSubview(lbCali)
+        view.addSubview(lbCalificacion)
        // Añade un tap para que regrese al inicio
     view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
         
@@ -101,6 +108,34 @@ class ViewControllerResultado: UIViewController, UITableViewDelegate, UITableVie
         
         return cell
 
+    }
+    
+    func setUpLayout(){
+        
+        lbRes.translatesAutoresizingMaskIntoConstraints = false
+        lbCalificacion.translatesAutoresizingMaskIntoConstraints = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        lbTop.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        //Contrains label Resultado
+        lbRes.topAnchor.constraint(equalTo: view.topAnchor, constant: 110).isActive = true
+        lbRes.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        //Constrains label calificacion
+        lbCalificacion.topAnchor.constraint(equalTo: lbRes.bottomAnchor, constant: 150).isActive = true
+        lbCalificacion.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        //Constrains del tableview
+        tableView.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 90).isActive = true
+        tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        tableView.widthAnchor.constraint(equalToConstant: 343).isActive = true
+        tableView.heightAnchor.constraint(equalToConstant: 220).isActive = true
+        
+        //Constrains del top5
+        lbTop.bottomAnchor.constraint(equalTo: tableView.topAnchor, constant: 0).isActive = true
+        lbTop.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
     }
 
     /*
