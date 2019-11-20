@@ -18,13 +18,30 @@ class ViewControllerLogin: UIViewController {
     @IBOutlet weak var btLogIn: UIButton!
     @IBOutlet weak var btSignUp: UIButton!
     
-    let userDefaults = UserDefaults.standard
+    var UserData: User!
+    
+    //------------------------------------------------------
+    func dataFileUrl() -> URL {
+        let url = FileManager().urls(
+            for: .documentDirectory,
+            in: .userDomainMask
+        ).first!
+        let pathArchivo = url.appendingPathComponent(
+            "Quizzlet.plist"
+        )
+        return pathArchivo
+    }
 
     
     //------------------------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLayout()
+        getUser()
+        print(UserData)
+        if(UserData != nil) {
+            performSegue(withIdentifier: "Success", sender: nil)
+        }
     }
     
     //------------------------------------------------------
@@ -36,30 +53,118 @@ class ViewControllerLogin: UIViewController {
     @IBAction func onLogin(_ sender: UIButton) {
         if let strEmail = lbEmail.text,
             let strPassword = lbPassword.text {
-            
-            UserAPI.shared.Login(
-                strEmail: strEmail,
-                strPassword: strPassword
-            ) { (res) in
-                
-                switch res {
-                case .failure(let err as NSError):
-                    if(
-                        //Client error
-                        err.code >= 400 &&
-                        err.code < 600
-                        ){
-                     print(err.code, err.userInfo["message"]! )
-                    } else {
-                        print(err.localizedDescription)
+            if(strEmail != "" && strPassword != "") {
+                UserAPI.shared.Login(
+                    strEmail: strEmail,
+                    strPassword: strPassword
+                ) { (res) in
+                    
+                    switch res {
+                    case .failure(let err as NSError):
+                        
+                        var ErrorCode: String = "";
+                        var ErrorMessage: String = "";
+                        if(
+                            //Client error
+                            err.code >= 400 &&
+                            err.code < 600
+                            ){
+                            ErrorCode = "\(err.code)"
+                            ErrorMessage = err.userInfo["message"]! as! String
+                        } else {
+                            ErrorMessage = err.localizedDescription;
+                        }
+                        
+                        self.showAlert(
+                            strType: "Error",
+                            strCode: ErrorCode,
+                            strMessage: ErrorMessage
+                        )
+                        
+                    case .success(let user):
+                        self.UserData = user
+                        self.saveUserData()
+                        self.performSegue(
+                            withIdentifier: "Success",
+                            sender: nil
+                        )
                     }
-                case .success(let user):
-                    print(user)
                 }
+
+            } else {
+                showAlert(
+                    strType: "Error",
+                    strCode: "",
+                    strMessage: "Ingresa todos los datos solicitados"
+                )
             }
+            
+        }
+    }
+        
+    //------------------------------------------------------
+    func showAlert(
+        strType: String,
+        strCode: String,
+        strMessage: String
+    ) {
+        let alert = UIAlertController(
+            title: strType + " " + strCode,
+            message: strMessage,
+            preferredStyle: .alert
+        )
+        
+        let action = UIAlertAction(
+            title: "OK",
+            style: .cancel,
+            handler: nil
+        )
+        
+        alert.addAction(action)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    //MARK: - Persistance
+    //------------------------------------------------------
+    func saveUserData() {
+        do {
+            let data = try PropertyListEncoder().encode(UserData)
+           try data.write(to: dataFileUrl())
+        }
+        catch {
+           print("Save Failed")
+        }
+    }
+    //------------------------------------------------------
+    func getUser() {
+        do {
+            let data = try Data.init(contentsOf: dataFileUrl())
+            UserData = try PropertyListDecoder().decode(User.self, from: data)
+        }
+        catch {
+            print("Error reading or decoding file")
         }
     }
     
+    //MARK: - Navigation
+    //------------------------------------------------------
+    override func shouldPerformSegue(
+        withIdentifier identifier: String,
+        sender: Any?
+    ) -> Bool {
+        if(identifier == "Success") {
+            if(UserData == nil) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return true;
+    }
+    
+    //MARK: - Constrains
+    //------------------------------------------------------
     func setUpLayout() {
         //This enables autolayout
         lbLoging.translatesAutoresizingMaskIntoConstraints = false
@@ -111,15 +216,5 @@ class ViewControllerLogin: UIViewController {
     @IBAction func quitarTeclado(_ sender: Any) {
         view.endEditing(true)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

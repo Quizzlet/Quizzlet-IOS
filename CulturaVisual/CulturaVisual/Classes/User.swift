@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct User: Decodable {
+struct User: Codable {
     var strName: String;
     var strMatricula: String;
     var token: String;
