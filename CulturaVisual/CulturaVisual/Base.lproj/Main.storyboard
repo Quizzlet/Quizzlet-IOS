@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Nsh-EW-ych">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Nsh-EW-ych">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -53,7 +53,7 @@
                                 </state>
                                 <connections>
                                     <action selector="onLogin:" destination="Nlb-lp-J3G" eventType="touchUpInside" id="Znz-mP-BEn"/>
-                                    <segue destination="15q-cg-jHZ" kind="presentation" modalPresentationStyle="fullScreen" id="nq6-ak-xuZ"/>
+                                    <segue destination="15q-cg-jHZ" kind="presentation" identifier="Success" modalPresentationStyle="fullScreen" id="nq6-ak-xuZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5fk-Jb-ZUo">
@@ -67,7 +67,7 @@
                                 </state>
                                 <connections>
                                     <action selector="onLogin:" destination="Nlb-lp-J3G" eventType="touchUpInside" id="2o7-LW-Z58"/>
-                                    <segue destination="v1w-vo-aIP" kind="show" id="eHx-wO-TwQ"/>
+                                    <segue destination="v1w-vo-aIP" kind="show" identifier="SingUp" id="eHx-wO-TwQ"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Login" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvh-nk-doQ">
