@@ -66,7 +66,6 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="onLogin:" destination="Nlb-lp-J3G" eventType="touchUpInside" id="2o7-LW-Z58"/>
                                     <segue destination="v1w-vo-aIP" kind="show" identifier="SingUp" id="eHx-wO-TwQ"/>
                                 </connections>
                             </button>

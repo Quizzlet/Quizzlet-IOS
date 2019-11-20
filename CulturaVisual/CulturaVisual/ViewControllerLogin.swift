@@ -66,7 +66,10 @@ class ViewControllerLogin: UIViewController {
                         
                     case .success(let user):
                         self.UserData = user
-                        self.performSegue(withIdentifier: "Success", sender: nil)
+                        self.performSegue(
+                            withIdentifier: "Success",
+                            sender: nil
+                        )
                     }
                 }
 
@@ -74,7 +77,7 @@ class ViewControllerLogin: UIViewController {
                 showAlert(
                     strType: "Error",
                     strCode: "",
-                    strMessage: "Fill in the blanks"
+                    strMessage: "Ingresa todos los datos solicitados"
                 )
             }
             
@@ -106,7 +109,10 @@ class ViewControllerLogin: UIViewController {
     
     
     //------------------------------------------------------
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+    override func shouldPerformSegue(
+        withIdentifier identifier: String,
+        sender: Any?
+    ) -> Bool {
         if(identifier == "Success") {
             if(UserData == nil) {
                 return false;

@@ -42,17 +42,24 @@ class ViewControllerSingUp: UIViewController {
             let strPassword = lbPassword.text,
             let strConfirmPassword = lbConfirmPassword.text {
             
-            if strName == "" || strMatricula == "" || strEmail == "" || strPassword == "" || strConfirmPassword == "" {
-                let alerta = UIAlertController(title: "Error", message: "Ingresa todos los datos solicitados", preferredStyle: .alert)
-                let accion = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                alerta.addAction(accion)
-                present(alerta, animated: true, completion: nil)
-            }
-            else if strPassword != strConfirmPassword{
-                let alerta = UIAlertController(title: "Error", message: "Las contraseñas no coinciden", preferredStyle: .alert)
-                let accion = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                alerta.addAction(accion)
-                present(alerta, animated: true, completion: nil)
+            if strName == "" ||
+                strMatricula == "" ||
+                strEmail == "" ||
+                strPassword == "" ||
+                strConfirmPassword == ""
+            {
+                showAlert(
+                    strType:
+                    "Error",
+                    strCode: "",
+                    strMessage: "Ingresa todos los datos solicitados"
+                )
+            } else if strPassword != strConfirmPassword {
+                showAlert(
+                    strType: "Error",
+                    strCode: "",
+                    strMessage: "Las contraseñas no coinciden"
+                )
             }
             else{
                 UserAPI.shared.Singup(
@@ -63,23 +70,60 @@ class ViewControllerSingUp: UIViewController {
                 ) { (res) in
                     switch res {
                     case .failure(let err as NSError):
+                        var ErrorCode: String = "";
+                        var ErrorMessage: String = "";
                         if(
                             //Client error
                             err.code >= 400 &&
                             err.code < 600
                             ){
-                         print(err.code, err.userInfo["message"]! )
+                            ErrorCode = "\(err.code)"
+                            ErrorMessage = err.userInfo["message"]! as! String
                         } else {
-                            print(err.localizedDescription)
+                            ErrorMessage = err.localizedDescription
                         }
+                        self.showAlert(
+                            strType: "Error",
+                            strCode: ErrorCode,
+                            strMessage: ErrorMessage
+                        )
                     case .success(let res):
-                        print(res)
+                        self.showAlert(
+                            strType: "Success",
+                            strCode: "",
+                            strMessage: res
+                        )
                     }
                 }
-                navigationController?.popToRootViewController(animated: true)
             }
         }
     }
+    
+    //------------------------------------------------------
+    func showAlert(
+        strType: String,
+        strCode: String,
+        strMessage: String
+    ) {
+        let alert = UIAlertController(
+            title: strType,
+            message: strMessage,
+            preferredStyle: .alert
+        )
+        
+        let action = UIAlertAction(
+            title: "OK",
+            style: .cancel,
+            handler: nil
+        )
+        
+        alert.addAction(action)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    //MARK: - Autolayout
+    //------------------------------------------------------
     func setUpLayout(){
         lbNombre.translatesAutoresizingMaskIntoConstraints = false
         tfNombre.translatesAutoresizingMaskIntoConstraints = false
@@ -150,6 +194,7 @@ class ViewControllerSingUp: UIViewController {
 //        btSignUp.layer.backgroundColor = UIColor.clear.cgColor
     }
     
+    //------------------------------------------------------
     @IBAction func quitarTeclado(_ sender: Any) {
         view.endEditing(true)
     }
