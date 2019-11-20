@@ -439,11 +439,17 @@
                                 <rect key="frame" x="20" y="114" width="39" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Close"/>
+                                <connections>
+                                    <action selector="popoverPresentationControllerDidDismissPopoverWithPopoverPresentationController:" destination="Ydr-Vv-AxS" eventType="touchUpInside" id="lS0-Qy-9B6"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nwx-Zu-yqB">
                                 <rect key="frame" x="128" y="114" width="56" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add"/>
+                                <connections>
+                                    <action selector="popoverPresentationControllerDidDismissPopoverWithPopoverPresentationController:" destination="Ydr-Vv-AxS" eventType="touchUpInside" id="FFt-Uc-skL"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
