@@ -11,6 +11,6 @@ import UIKit
 class Grade: Codable {
     
     var strName: String;
-    var intGrade: Int;
+    var intGrade: String;
 
 }

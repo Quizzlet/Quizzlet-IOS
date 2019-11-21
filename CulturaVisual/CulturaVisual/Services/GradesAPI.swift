@@ -23,7 +23,7 @@ class GradesAPI: NSObject {
         strIdGroup: String,
         strIdSubject: String,
         strIdQuiz: String,
-        intGrade: String,
+        intGrade: Int,
         user: User,
         //If the request has been completed
         completion: @escaping (Result<[Grade], Error>) -> ()
@@ -33,7 +33,7 @@ class GradesAPI: NSObject {
         
         //Make the url
         guard let url = URL(
-            string: GradesAPI.BaseURL + "/addGrades"
+            string: GradesAPI.BaseURL + "/addGrade"
          ) else { return }
         
         //Settings for the post
@@ -49,15 +49,14 @@ class GradesAPI: NSObject {
             "Bearer " + token,
             forHTTPHeaderField: "Authorization"
         )
-        
+        let strString = "\(intGrade)"
         //Directiory for our information to send
         let gradeInfo = [
             "strIdGroup": strIdGroup,
             "strIdSubject": strIdSubject,
             "strIdQuiz": strIdQuiz,
-            "intGrade": intGrade
-        ]
-        
+            "intGrade": strString
+            ]
         do {
             //Transform data to send into a json object
             let data = try JSONSerialization.data(
@@ -69,7 +68,6 @@ class GradesAPI: NSObject {
             //make the request
             URLSession.shared.dataTask(with: urlRequest) {
                 (data, resp, error) in
-                
                 DispatchQueue.main.async {
                     //check if there is an error connecting
                     if error != nil {
@@ -113,6 +111,7 @@ class GradesAPI: NSObject {
                         )
                         completion(.success(grades))
                     } catch {
+                        print(error)
                         //Error if we cannot convert to grades [] from json
                         completion(.failure(error))
                     }
@@ -120,6 +119,7 @@ class GradesAPI: NSObject {
             }.resume()
             
         } catch {
+            print("error")
             completion(.failure(error))
         }
     }

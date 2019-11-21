@@ -26,65 +26,144 @@ class ViewControllerPregunta: UIViewController {
     var cont = 0
     var listaPreguntas : [String]!
     var listaRespuestas : [String]!
-    var listaRespuestas2 : [String]!
-    var res1 = 0
-    var res2 = 1
-    var res3 = 2
-    var res4 = 3
+    
+    //Variables para peticiones
+    var UserData: User!
+    var question: Question!
+    var quizDetails: QuizDetails!
+    var quiz : Quiz!
+    var strIdGroup: String!
+    var size : Int!
+    var listaExtra : [String]!
+    var strIdTema : String!
     
     override func viewDidLoad() {
            super.viewDidLoad()
            setUpLayout()
-        newQuestion()
+        getQuizDetails()
        }
     
     override func viewDidAppear(_ animated: Bool) {
         newQuestion()
     }
     
+    func getQuizDetails(){
+        QuizAPI.shared.getQuizDetails(
+            strId: quiz._id,
+            user: UserData
+        ) { (res) in
+            switch res {
+            case .failure(let err as NSError):
+                var ErrorCode: String = "";
+                var ErrorMessage: String = "";
+                if(
+                    //Client error
+                    err.code >= 400 &&
+                    err.code < 600
+                    ) {
+                    ErrorCode = "\(err.code)"
+                    ErrorMessage = err.userInfo["message"]! as! String
+                } else {
+                    ErrorMessage = err.localizedDescription
+                }
+                self.showAlert(
+                    strType: "Error",
+                    strCode: ErrorCode,
+                    strMessage: ErrorMessage
+                )
+            case .success(let res):
+                self.quizDetails = res
+                self.size = res.arrQuestions.count
+                print(self.quizDetails.arrQuestions)
+                print(self.size!)
+                self.newQuestion()
+
+            }
+        }
+    }
+    func getQuestion(){
+        if quizDetails != nil && cont < size{
+            QuestionAPI.shared.getQuestionDetails(
+                       strId: quizDetails.arrQuestions[cont],
+                       user: UserData
+                   ) { (res) in
+                       switch res {
+                       case .failure(let err as NSError):
+                           var ErrorCode: String = "";
+                           var ErrorMessage: String = "";
+                           if(
+                               //Client error
+                               err.code >= 400 &&
+                               err.code < 600
+                               ) {
+                               ErrorCode = "\(err.code)"
+                               ErrorMessage = err.userInfo["message"]! as! String
+                           } else {
+                               ErrorMessage = err.localizedDescription
+                           }
+                           self.showAlert(
+                               strType: "Error",
+                               strCode: ErrorCode,
+                               strMessage: ErrorMessage
+                           )
+                       case .success(let res):
+                           self.question = res
+//                           print(self.question.strQuestionDesc)
+                       }
+                   }
+        }
+       
+    }
+    
+    func showAlert(
+           strType: String,
+           strCode: String,
+           strMessage: String
+       ) {
+           let alert = UIAlertController(
+               title: strType,
+               message: strMessage,
+               preferredStyle: .alert
+           )
+           
+           let action = UIAlertAction(
+               title: "Ok",
+               style: .cancel,
+               handler: nil
+           )
+           alert.addAction(action)
+           
+           self.present(alert, animated: true, completion: nil)
+       }
     
     //Funcion para que las respuestas esten en diferente orden
     func nombreBt() {
-        
-        //Agarra un elemento al azar y despues lo borra del arreglo para que no se repitan respuestas
-        var randAnwser = listaRespuestas2.randomElement()
-        bt1.setTitle(randAnwser, for: .normal)
-        if let index = listaRespuestas2.firstIndex(of: randAnwser!){
-            listaRespuestas2.remove(at: index)
+        if question != nil{
+            listaExtra = question.strOptions
+            var randAnwser = listaExtra.randomElement()
+            bt1.setTitle(randAnwser, for: .normal)
+            if let index = listaExtra.firstIndex(of: randAnwser!){
+                listaExtra.remove(at: index)
+            }
+            randAnwser = listaExtra.randomElement()
+            bt2.setTitle(randAnwser, for: .normal)
+            if let index = listaExtra.firstIndex(of: randAnwser!){
+                listaExtra.remove(at: index)
+            }
+            randAnwser = listaExtra.randomElement()
+            bt3.setTitle(randAnwser, for: .normal)
+            if let index = listaExtra.firstIndex(of: randAnwser!){
+                        listaExtra.remove(at: index)
+            }
+            bt4.setTitle(listaExtra[0], for: .normal)
         }
-        randAnwser = listaRespuestas2.randomElement()
-        bt2.setTitle(randAnwser, for: .normal)
-        if let index = listaRespuestas2.firstIndex(of: randAnwser!){
-            listaRespuestas2.remove(at: index)
-        }
-        randAnwser = listaRespuestas2.randomElement()
-        bt3.setTitle(randAnwser, for: .normal)
-        if let index = listaRespuestas2.firstIndex(of: randAnwser!){
-                   listaRespuestas2.remove(at: index)
-        }
-        bt4.setTitle(listaRespuestas2[0], for: .normal)
     }
 
     @IBAction func seleccionar(_ sender: Any) {
         timer.invalidate()
         let respuestabt = bt2.currentTitle
-        var resCorrecta : String!
+        let resCorrecta = question.strOptions[question.strCorrect]
         
-        //Checa cual es la respuesta correcta de la pregunta
-        switch cont {
-        case 0:
-            resCorrecta = listaRespuestas[res1]
-            break;
-        case 1:
-            resCorrecta = listaRespuestas[res2]
-            break;
-        case 2:
-            resCorrecta = listaRespuestas[res3]
-            break;
-        default:
-            resCorrecta = listaRespuestas[res4]
-            break;
-        }
         //Compara la respuesta del boton seleccionado con la respuesta correcta
         if respuestabt == resCorrecta{
             preCorrectas += 1
@@ -110,10 +189,9 @@ class ViewControllerPregunta: UIViewController {
             self.bt2.isEnabled = true
             self.bt3.isEnabled = true
             self.bt4.isEnabled = true
-            print(self.cont)
             
 //            print("Despues de 5 seg")
-            if self.cont < 4 {
+            if self.cont < self.size{
                 self.newQuestion()
             }
             else{
@@ -125,21 +203,7 @@ class ViewControllerPregunta: UIViewController {
     @IBAction func seleccionar2(_ sender: Any) {
         timer.invalidate()
         let respuestabt = bt1.currentTitle
-        var resCorrecta : String!
-        switch cont {
-        case 0:
-            resCorrecta = listaRespuestas[res1]
-            break;
-        case 1:
-            resCorrecta = listaRespuestas[res2]
-            break;
-        case 2:
-            resCorrecta = listaRespuestas[res3]
-            break;
-        default:
-            resCorrecta = listaRespuestas[res4]
-            break;
-        }
+        let resCorrecta = question.strOptions[question.strCorrect]
         
         if respuestabt == resCorrecta{
             preCorrectas += 1
@@ -159,16 +223,14 @@ class ViewControllerPregunta: UIViewController {
         
 //        print("Antes")
        
-       print(cont)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.cont += 1
             self.bt1.isEnabled = true
             self.bt2.isEnabled = true
             self.bt3.isEnabled = true
             self.bt4.isEnabled = true
-            print(self.cont)
 //            print("Despues de 5 seg")
-            if self.cont < 4 {
+            if self.cont < self.size {
                 self.newQuestion()
             }
             else{
@@ -181,21 +243,7 @@ class ViewControllerPregunta: UIViewController {
     @IBAction func seleccionar3(_ sender: Any) {
         timer.invalidate()
         let respuestabt = bt3.currentTitle
-        var resCorrecta : String!
-        switch cont {
-        case 0:
-            resCorrecta = listaRespuestas[res1]
-            break;
-        case 1:
-            resCorrecta = listaRespuestas[res2]
-            break;
-        case 2:
-            resCorrecta = listaRespuestas[res3]
-            break;
-        default:
-            resCorrecta = listaRespuestas[res4]
-            break;
-        }
+        let resCorrecta = question.strOptions[question.strCorrect]
         
         if respuestabt == resCorrecta{
             preCorrectas += 1
@@ -213,7 +261,6 @@ class ViewControllerPregunta: UIViewController {
         bt3.isEnabled = false
         bt4.isEnabled = false
         //Delay
-       print(cont)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.cont += 1
             self.bt1.isEnabled = true
@@ -221,7 +268,7 @@ class ViewControllerPregunta: UIViewController {
             self.bt3.isEnabled = true
             self.bt4.isEnabled = true
             print(self.cont)
-            if self.cont < 4 {
+            if self.cont < self.size{
                 self.newQuestion()
             }
             else{
@@ -233,21 +280,7 @@ class ViewControllerPregunta: UIViewController {
     @IBAction func seleccionar4(_ sender: Any) {
         timer.invalidate()
         let respuestabt = bt4.currentTitle
-        var resCorrecta : String!
-        switch cont {
-        case 0:
-            resCorrecta = listaRespuestas[res1]
-            break;
-        case 1:
-            resCorrecta = listaRespuestas[res2]
-            break;
-        case 2:
-            resCorrecta = listaRespuestas[res3]
-            break;
-        default:
-            resCorrecta = listaRespuestas[res4]
-            break;
-        }
+        let resCorrecta = question.strOptions[question.strCorrect]
 
         if respuestabt == resCorrecta{
             preCorrectas += 1
@@ -272,7 +305,7 @@ class ViewControllerPregunta: UIViewController {
             self.bt4.isEnabled = true
             print(self.cont)
             self.cont += 1
-            if self.cont < 4 {
+            if self.cont < self.size{
                 self.newQuestion()
             }
             else{
@@ -286,7 +319,7 @@ class ViewControllerPregunta: UIViewController {
         lbTimer.text = String(seconds)
         
         if seconds == 0{
-            if cont < 3{
+            if cont < size{
                 cont += 1
                 timer.invalidate()
                 newQuestion()
@@ -301,37 +334,42 @@ class ViewControllerPregunta: UIViewController {
     }
     
     func newQuestion(){
-        seconds = 30
-        lbTimer.text = String(seconds)
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(counter), userInfo: nil, repeats: true)
-        listaPreguntas = ["Cuanto es 2 + 2", "Cuanto es 3 + 3?", "Cuanto es 4 * 4?", "Cuanto es 5 - 3?"]
-        listaRespuestas = ["4", "6", "16", "2"]
-        listaRespuestas2 = ["4", "6", "16", "2"]
-        lbPregunta.text = listaPreguntas[cont]
-        lbNum.text = "\(cont + 1)"
-        nombreBt()
-        bt1.layer.backgroundColor = UIColor.clear.cgColor
-        bt2.layer.backgroundColor = UIColor.clear.cgColor
-        bt3.layer.backgroundColor = UIColor.clear.cgColor
-        bt4.layer.backgroundColor = UIColor.clear.cgColor
-        bt1.layer.cornerRadius = 5
-        bt1.layer.borderWidth = 3
-        bt1.layer.borderColor = UIColor.black.cgColor
-        bt2.layer.cornerRadius = 5
-        bt2.layer.borderWidth = 3
-        bt2.layer.borderColor = UIColor.black.cgColor
-        bt3.layer.cornerRadius = 5
-        bt3.layer.borderWidth = 3
-        bt3.layer.borderColor = UIColor.black.cgColor
-        bt4.layer.cornerRadius = 5
-        bt4.layer.borderWidth = 3
-        bt4.layer.borderColor = UIColor.black.cgColor
+            getQuestion()
+        if question != nil {
+            print(question.strQuestionDesc)
+            seconds = 10
+            lbTimer.text = String(seconds)
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(counter), userInfo: nil, repeats: true)
+            lbPregunta.text = question.strQuestionDesc
+            lbNum.text = "\(cont + 1)"
+            nombreBt()
+            bt1.layer.backgroundColor = UIColor.clear.cgColor
+            bt2.layer.backgroundColor = UIColor.clear.cgColor
+            bt3.layer.backgroundColor = UIColor.clear.cgColor
+            bt4.layer.backgroundColor = UIColor.clear.cgColor
+            bt1.layer.cornerRadius = 5
+            bt1.layer.borderWidth = 3
+            bt1.layer.borderColor = UIColor.black.cgColor
+            bt2.layer.cornerRadius = 5
+            bt2.layer.borderWidth = 3
+            bt2.layer.borderColor = UIColor.black.cgColor
+            bt3.layer.cornerRadius = 5
+            bt3.layer.borderWidth = 3
+            bt3.layer.borderColor = UIColor.black.cgColor
+            bt4.layer.cornerRadius = 5
+            bt4.layer.borderWidth = 3
+            bt4.layer.borderColor = UIColor.black.cgColor
+        }
+//        else{
+//            newQuestion()
+//        }
+//
     }
     
     
     //Checa que no haga el segue si aun no pasan todas las preguntas
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if cont <= 3{
+        if cont < size{
             return false
         }
         return true
@@ -345,6 +383,12 @@ class ViewControllerPregunta: UIViewController {
         
         let vistaRes = segue.destination as! ViewControllerResultado
         vistaRes.preCorrectas = preCorrectas
+        vistaRes.strIdGroup = strIdGroup
+        vistaRes.strIdQuiz = quiz._id
+        vistaRes.strIdTema = strIdTema
+        vistaRes.preTotales = size
+        vistaRes.UserData = UserData
+        
     }
     
     //MARK:- Constrains
