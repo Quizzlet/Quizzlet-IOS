@@ -42,13 +42,8 @@ class ViewController: UIViewController {
     // MARK: - Navigation
     //------------------------------------------------------
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "Perfil") {
-            let PerfilView = segue.destination as! ViewControllerPerfil
-            PerfilView.UserData = UserData
-        } else if(segue.identifier == "Grupos") {
             let GruposView = segue.destination as! ViewControllerGrupos
             GruposView.UserData = UserData
-        }
     }
     
     // MARK: - Persistance
