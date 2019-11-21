@@ -13,7 +13,6 @@ class ViewControllerPop: UIViewController {
     @IBOutlet weak var tfGroup: UITextField!
     
     var UserData: User!
-
     //------------------------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
