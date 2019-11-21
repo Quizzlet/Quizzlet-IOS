@@ -291,7 +291,9 @@
                         <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="UNx-B7-M3q"/>
+                    <navigationItem key="navigationItem" id="UNx-B7-M3q">
+                        <barButtonItem key="backBarButtonItem" title="Menu" id="mng-OM-Fpg"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="btCreditos" destination="VJt-ow-APc" id="rcS-gh-zPg"/>
                         <outlet property="btLogOut" destination="tnX-FE-q64" id="fnS-cn-gWt"/>
@@ -371,7 +373,9 @@
                         <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="afP-4V-WII"/>
                     </view>
-                    <navigationItem key="navigationItem" id="gne-Zk-feJ"/>
+                    <navigationItem key="navigationItem" id="gne-Zk-feJ">
+                        <barButtonItem key="backBarButtonItem" title="Temas" id="HXY-Sx-27n"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="lbTemas" destination="yH0-fu-T2G" id="N91-ki-wBy"/>
                         <outlet property="tableView" destination="gee-Uc-UsV" id="hxd-7c-FXz"/>
@@ -533,7 +537,9 @@
                         <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="Lz1-3s-dG2"/>
                     </view>
-                    <navigationItem key="navigationItem" id="LIZ-DN-SJb"/>
+                    <navigationItem key="navigationItem" id="LIZ-DN-SJb">
+                        <barButtonItem key="backBarButtonItem" title="Cancelar" id="iIJ-41-MiI"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="lbQuiz" destination="VUe-TS-OWt" id="uj1-JU-cs9"/>
                         <outlet property="tableView" destination="Tdk-NH-bRZ" id="RNN-k0-BVY"/>
@@ -816,7 +822,9 @@
                         <color key="backgroundColor" red="0.90076392890000001" green="0.90120279790000002" blue="0.98738354439999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="Vwu-rR-6mT"/>
                     </view>
-                    <navigationItem key="navigationItem" id="N3n-qr-IBR"/>
+                    <navigationItem key="navigationItem" id="N3n-qr-IBR">
+                        <barButtonItem key="backBarButtonItem" title="Grupos" id="9Yn-LN-dJj"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="TVGroups" destination="g5x-R0-KXG" id="v1b-U9-WV8"/>
                         <outlet property="btAgregar" destination="Y1u-DH-4dE" id="hcW-fJ-9YR"/>

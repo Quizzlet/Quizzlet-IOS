@@ -97,6 +97,7 @@ class ViewControllerTemas: UIViewController, UITableViewDataSource, UITableViewD
         
         cell.lbTema.text = GroupDetails.strSubjects[indexPath.row].strName
         cell.lbCont.text = "\( GroupDetails.strSubjects[indexPath.row].intCompleted / 100)"
+        cell.pvProgreso.setProgress(Float((GroupDetails.strSubjects[indexPath.row].intCompleted)/100), animated: true)
         
         return cell
     }
