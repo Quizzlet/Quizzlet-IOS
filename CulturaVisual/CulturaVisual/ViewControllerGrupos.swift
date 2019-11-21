@@ -117,6 +117,11 @@ class ViewControllerGrupos:
             let vistaPopOver = segue.destination as! ViewControllerPop
             vistaPopOver.popoverPresentationController?.delegate = self
             vistaPopOver.UserData = UserData
+        } else if(segue.identifier == "Temas") {
+            let indexPath = TVGroups.indexPathForSelectedRow!
+            let ViewTemas = segue.destination as! ViewControllerTemas
+            ViewTemas.Group = Groups[indexPath.row]
+            ViewTemas.UserData = UserData
         }
     }
     //MARK:- Constrains
