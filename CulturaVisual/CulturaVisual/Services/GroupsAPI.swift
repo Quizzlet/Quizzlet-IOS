@@ -27,7 +27,6 @@ class GroupsAPI: NSObject {
     ) {
         //Get the token
         let token: String = user.token
-        print(token)
         //Make the url
         guard let url = URL(
             string: GroupsAPI.BaseURL + "/join"
@@ -119,5 +118,90 @@ class GroupsAPI: NSObject {
         }
         
     }
+    
+    //MARK: - Get My Groups
+    //------------------------------------------------------
+    func GetMyGroups(
+        //Data to send
+        user: User,
+        //If the request has been completed
+        completion: @escaping (Result<[Group], Error>) -> ()
+    ) {
+        //Get the token
+        let token: String = user.token
+        
+        //Make the url
+        guard let url = URL(
+            string: GroupsAPI.BaseURL + "/Mine"
+            ) else { return }
+        
+        //Settings for the GET
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "GET"
+        urlRequest.setValue(
+            "application/json",
+            forHTTPHeaderField: "content-typ"
+        )
+        
+        //Add Token
+        urlRequest.addValue(
+            "Beader " + token,
+            forHTTPHeaderField: "Authorization"
+        )
+        
+        URLSession.shared.dataTask(with: urlRequest) {
+            (data, resp, error) in
+            
+            DispatchQueue.main.async {
+                //check if there is an error connecting
+                if error != nil {
+                    completion(.failure(error!))
+                    return
+                }
+                
+                //check if there is data in there
+                guard let data = data else { return }
+                
+                //Decode Error Message
+                if let httpResponse = resp as?
+                    HTTPURLResponse {
+                    
+                    if(httpResponse.statusCode != 200) {
+                        do {
+                            let json = try
+                                JSONSerialization.jsonObject(
+                                    with: data,
+                                    options: []
+                                ) as? [String : Any]
+                            
+                            let err = NSError(
+                                domain: "",
+                                code: httpResponse.statusCode,
+                                userInfo: json
+                            )
+                            completion(.failure(err))
+                            return
+                        } catch {
+                            completion(.failure(error))
+                        }
+                    }
+                }
+                
+                do {
+                    //Decode the data recieved
+                    let groups = try JSONDecoder().decode(
+                        [Group].self,
+                        from: data
+                    )
+                    completion(.success(groups))
+                }catch {
+                    //Error if we cannot convert from json of Group
+                    completion(.failure(error))
+                }
+            }
+            
+        }.resume()
+    }
+    
 }
 //==========================================================

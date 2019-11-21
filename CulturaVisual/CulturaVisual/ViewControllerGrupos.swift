@@ -15,20 +15,80 @@ class ViewControllerGrupos:
     UIPopoverPresentationControllerDelegate {
     
     var UserData: User!
+    var Groups: [Group] = []
 
+    @IBOutlet weak var TVGroups: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        GetGroups()
+    }
+    
+    //MARK: - Petitions
+    //------------------------------------------------------
+    func GetGroups() {
+        GroupsAPI.shared.GetMyGroups(
+        user: UserData
+        ) { (res) in
+            switch res {
+            case .failure(let err as NSError):
+                var ErrorCode: String = "";
+                var ErrorMessage: String = "";
+                if(
+                    //Client error
+                    err.code >= 400 &&
+                    err.code < 600
+                    ) {
+                    ErrorCode = "\(err.code)"
+                    ErrorMessage = err.userInfo["message"]! as! String
+                } else {
+                    ErrorMessage = err.localizedDescription
+                }
+                
+                self.showAlert(
+                    strType: "Error",
+                    strCode: ErrorCode,
+                    strMessage: ErrorMessage
+                )
+            case .success(let res):
+                self.Groups = res
+                self.TVGroups.reloadData()
+            }
+        }
+    }
+    
+    //------------------------------------------------------
+    func showAlert(
+        strType: String,
+        strCode: String,
+        strMessage: String
+    ) {
+        let alert = UIAlertController(
+            title: strType,
+            message: strMessage,
+            preferredStyle: .alert
+        )
+        
+        let action = UIAlertAction(
+            title: "Ok",
+            style: .cancel,
+            handler: nil
+        )
+        
+        alert.addAction(action)
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     //MARK: - Table Methods
     //------------------------------------------------------
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return Groups.count
     }
     //------------------------------------------------------
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "celda", for: indexPath)
-        cell.textLabel?.text = "hello"
+        cell.textLabel?.text = Groups[indexPath.row].strName
         return cell
     }
     
