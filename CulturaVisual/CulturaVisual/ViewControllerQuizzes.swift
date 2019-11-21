@@ -13,6 +13,7 @@ class ViewControllerQuizzes: UIViewController, UITableViewDelegate, UITableViewD
     var UserData: User!
     var Subject: Subject!
     var SubjectDetails: SubjectDetails!
+    var strIdGroup: String!
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var lbQuiz: UILabel!
@@ -23,6 +24,8 @@ class ViewControllerQuizzes: UIViewController, UITableViewDelegate, UITableViewD
         setUpLayout()
         lbQuiz.text = Subject.strName
         GetSubjectDetails()
+        print("subject", Subject._id)
+        print("group", strIdGroup)
 
     }
     
