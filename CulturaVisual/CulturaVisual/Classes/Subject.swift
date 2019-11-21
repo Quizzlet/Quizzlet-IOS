@@ -11,5 +11,5 @@ import UIKit
 class Subject: Codable {
     var strName: String;
     var _id: String;
-    var intCompleted: Int
+    var intCompleted: Int;
 }

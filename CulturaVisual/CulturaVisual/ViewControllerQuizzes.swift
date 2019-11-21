@@ -10,39 +10,99 @@ import UIKit
 
 class ViewControllerQuizzes: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var UserData: User!
+    var Subject: Subject!
+    var SubjectDetails: SubjectDetails!
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var lbQuiz: UILabel!
-    var quiz : String!
     
-    var listaQuiz
-    = ["Quiz 1", "Quiz 2", "Quiz 3", "Quiz 4"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLayout()
-        
-        lbQuiz.text = quiz
-        title = "Quizzes"
+        lbQuiz.text = Subject.strName
+        GetSubjectDetails()
 
-        // Do any additional setup after loading the view.
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listaQuiz.count
     }
     
+    // MARK: - Petitions
+    //------------------------------------------------------
+    func GetSubjectDetails() {
+        SubjectAPI.shared.GetSubjectDetails(
+            strId: Subject._id,
+            user: UserData
+        ) { (res) in
+            switch res {
+            case .failure(let err as NSError):
+                var ErrorCode: String = "";
+                var ErrorMessage: String = "";
+                if(
+                    //Client error
+                    err.code >= 400 &&
+                    err.code < 600
+                    ) {
+                    ErrorCode = "\(err.code)"
+                    ErrorMessage = err.userInfo["message"]! as! String
+                } else {
+                    ErrorMessage = err.localizedDescription
+                }
+                self.showAlert(
+                    strType: "Error",
+                    strCode: ErrorCode,
+                    strMessage: ErrorMessage
+                )
+            case .success(let res):
+                self.SubjectDetails = res
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    //------------------------------------------------------
+    func showAlert(
+        strType: String,
+        strCode: String,
+        strMessage: String
+    ) {
+        let alert = UIAlertController(
+            title: strType,
+            message: strMessage,
+            preferredStyle: .alert
+        )
+        
+        let action = UIAlertAction(
+            title: "Ok",
+            style: .cancel,
+            handler: nil
+        )
+        alert.addAction(action)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: - Table Functions
+    //------------------------------------------------------
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if(SubjectDetails == nil) {
+            return 0
+        } else {
+            return SubjectDetails.arrQuizzes.count
+        }
+    }
+    //------------------------------------------------------
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "celda", for: indexPath)
-        
-        cell.textLabel?.text = listaQuiz[indexPath.row]
-        
-        
+        cell.textLabel?.text = SubjectDetails.arrQuizzes[indexPath.row].strName
         return cell
     }
+    //------------------------------------------------------
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(70)
     }
     
     //MARK:- Constrains
-    //====================================
+    //------------------------------------------------------
     func setUpLayout(){
         lbQuiz.translatesAutoresizingMaskIntoConstraints = false
     tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -58,15 +118,5 @@ class ViewControllerQuizzes: UIViewController, UITableViewDelegate, UITableViewD
         tableView.heightAnchor.constraint(equalToConstant: 280).isActive = true
         
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

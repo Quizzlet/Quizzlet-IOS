@@ -25,7 +25,7 @@ class ViewControllerTemas: UIViewController, UITableViewDataSource, UITableViewD
         GetGroupDetails()
     }
     
-    //MARK: Petitions
+    // MARK: - Petitions
     //------------------------------------------------------
     func GetGroupDetails() {
         GroupsAPI.shared.GetGroupDetails(
@@ -111,9 +111,9 @@ class ViewControllerTemas: UIViewController, UITableViewDataSource, UITableViewD
         let vistaQuiz = segue.destination as! ViewControllerQuizzes
         let indexPath = tableView.indexPathForSelectedRow!
         
-        vistaQuiz.quiz = GroupDetails.strSubjects[indexPath.row].strName
-
-        }
+        vistaQuiz.Subject = GroupDetails.strSubjects[indexPath.row]
+        vistaQuiz.UserData = UserData
+    }
 
     //MARK: - Layout
     //------------------------------------------------------
