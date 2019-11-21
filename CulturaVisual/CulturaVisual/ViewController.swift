@@ -37,6 +37,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setUpLayout()
         getUser()
+        lbNombre.text = UserData.strName
+        lbMatricula.text = UserData.strMatricula
     }
     
     // MARK: - Navigation

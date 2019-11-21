@@ -126,7 +126,7 @@ class ViewControllerTemas: UIViewController, UITableViewDataSource, UITableViewD
         
         //Constrains del label Temas
         lbTemas.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        lbTemas.topAnchor.constraint(equalTo: view.topAnchor, constant: 170).isActive = true
+        lbTemas.topAnchor.constraint(equalTo: view.topAnchor, constant: 150).isActive = true
         
         //Constraions del table view
         tableView.topAnchor.constraint(equalTo: lbTemas.bottomAnchor, constant: 80).isActive = true

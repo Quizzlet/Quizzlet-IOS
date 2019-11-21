@@ -135,7 +135,7 @@ class ViewControllerGrupos:
         
         
         //Constrains del label Grupos
-        lbGrupos.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 170).isActive = true
+        lbGrupos.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 150).isActive = true
         lbGrupos.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         //Constrains del table view

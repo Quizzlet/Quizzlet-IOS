@@ -362,11 +362,11 @@ class ViewControllerPregunta: UIViewController {
         
         
         //Constrains del label Preg
-        lbPreg.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        lbPreg.topAnchor.constraint(equalTo: view.topAnchor, constant: 110).isActive = true
     lbPreg.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         //Constrains label cont
-        lbNum.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        lbNum.topAnchor.constraint(equalTo: view.topAnchor, constant: 110).isActive = true
         lbNum.leftAnchor.constraint(equalTo: lbPreg.rightAnchor, constant: 20).isActive = true
         
         //Constrains del label pregunta
