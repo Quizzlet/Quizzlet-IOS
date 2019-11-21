@@ -109,7 +109,7 @@
             <objects>
                 <viewController id="v1w-vo-aIP" customClass="ViewControllerSingUp" customModule="CulturaVisual" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="x3h-XQ-cpX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nombre:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mHb-jS-Vid">
@@ -789,7 +789,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
-                                            <segue destination="3vL-9A-W8D" kind="show" id="WBD-YQ-Sch"/>
+                                            <segue destination="3vL-9A-W8D" kind="show" identifier="Temas" id="WBD-YQ-Sch"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -48353,6 +48353,6 @@ AAAAACt+ww
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="bad-Dr-kcJ"/>
-        <segue reference="q32-Kz-63x"/>
+        <segue reference="a2m-0I-a5F"/>
     </inferredMetricsTieBreakers>
 </document>
