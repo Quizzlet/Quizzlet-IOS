@@ -14,6 +14,9 @@ class ViewControllerResultado: UIViewController, UITableViewDelegate, UITableVie
     
     var preCorrectas : Int!
     var pulsatingLayer : CAShapeLayer!
+    var gradientLayer : CAGradientLayer!
+    
+    
 
     
     @IBOutlet weak var tableView: UITableView!
@@ -81,6 +84,8 @@ class ViewControllerResultado: UIViewController, UITableViewDelegate, UITableVie
         shapeLayer.add(basicAnimation, forKey: "basic")
         
         view.addSubview(lbCalificacion)
+        
+        
        // Añade un tap para que regrese al inicio
     view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
         
