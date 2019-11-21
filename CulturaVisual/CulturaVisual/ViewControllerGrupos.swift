@@ -17,11 +17,14 @@ class ViewControllerGrupos:
     var UserData: User!
     var Groups: [Group] = []
 
+    @IBOutlet weak var btAgregar: UIButton!
+    @IBOutlet weak var lbGrupos: UILabel!
     @IBOutlet weak var TVGroups: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         GetGroups()
+        setLayout()
     }
     
     //MARK: - Petitions
@@ -92,6 +95,10 @@ class ViewControllerGrupos:
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(70)
+    }
+    
     // MARK: - PopOver
     //------------------------------------------------------
     func adaptivePresentationStyle(
@@ -111,5 +118,34 @@ class ViewControllerGrupos:
             vistaPopOver.popoverPresentationController?.delegate = self
             vistaPopOver.UserData = UserData
         }
+    }
+    //MARK:- Constrains
+    //====================================
+    
+    func setLayout(){
+        //Habilitar los constrains
+        lbGrupos.translatesAutoresizingMaskIntoConstraints = false
+        TVGroups.translatesAutoresizingMaskIntoConstraints = false
+        btAgregar.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        //Constrains del label Grupos
+        lbGrupos.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 170).isActive = true
+        lbGrupos.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        //Constrains del table view
+        
+        TVGroups.topAnchor.constraint(equalTo: lbGrupos.bottomAnchor, constant: 80).isActive = true
+        TVGroups.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        TVGroups.widthAnchor.constraint(equalToConstant: 343).isActive = true
+        TVGroups.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        
+        //Constrains del boton Agregar
+        
+        btAgregar.topAnchor.constraint(equalTo: TVGroups.bottomAnchor, constant: 50).isActive = true
+        btAgregar.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        btAgregar.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        btAgregar.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        
     }
 }

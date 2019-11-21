@@ -41,6 +41,8 @@ class ViewControllerQuizzes: UIViewController, UITableViewDelegate, UITableViewD
         return CGFloat(70)
     }
     
+    //MARK:- Constrains
+    //====================================
     func setUpLayout(){
         lbQuiz.translatesAutoresizingMaskIntoConstraints = false
     tableView.translatesAutoresizingMaskIntoConstraints = false
