@@ -20,6 +20,7 @@ class ViewControllerPregunta: UIViewController {
     @IBOutlet weak var lbPreg: UILabel!
     @IBOutlet weak var lbTimer: UILabel!
     
+    var preCorrectas = 0
     var seconds = 30
     var timer = Timer()
     var cont = 0
@@ -86,6 +87,7 @@ class ViewControllerPregunta: UIViewController {
         }
         //Compara la respuesta del boton seleccionado con la respuesta correcta
         if respuestabt == resCorrecta{
+            preCorrectas += 1
             bt2.layer.backgroundColor = UIColor.green.withAlphaComponent(0.5).cgColor
             let generator = UINotificationFeedbackGenerator()
             generator.notificationOccurred(.success)
@@ -100,18 +102,22 @@ class ViewControllerPregunta: UIViewController {
         bt3.isEnabled = false
         bt4.isEnabled = false
         
-        cont += 1
-//        print("Antes")
         //Delay para mostrar la siguiente pregunta
+        print(cont)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.cont += 1
             self.bt1.isEnabled = true
             self.bt2.isEnabled = true
             self.bt3.isEnabled = true
             self.bt4.isEnabled = true
+            print(self.cont)
             
 //            print("Despues de 5 seg")
             if self.cont < 4 {
                 self.newQuestion()
+            }
+            else{
+                self.performSegue(withIdentifier: "resp4", sender: nil)
             }
         }
     }
@@ -135,10 +141,8 @@ class ViewControllerPregunta: UIViewController {
             break;
         }
         
-        print(resCorrecta!)
-        print(respuestabt!)
-        
         if respuestabt == resCorrecta{
+            preCorrectas += 1
             bt1.layer.backgroundColor = UIColor.green.withAlphaComponent(0.5).cgColor
             let generator = UINotificationFeedbackGenerator()
             generator.notificationOccurred(.success)
@@ -152,17 +156,23 @@ class ViewControllerPregunta: UIViewController {
         bt2.isEnabled = false
         bt3.isEnabled = false
         bt4.isEnabled = false
-        cont += 1
         
 //        print("Antes")
+       
+       print(cont)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.cont += 1
             self.bt1.isEnabled = true
             self.bt2.isEnabled = true
             self.bt3.isEnabled = true
             self.bt4.isEnabled = true
+            print(self.cont)
 //            print("Despues de 5 seg")
             if self.cont < 4 {
                 self.newQuestion()
+            }
+            else{
+                self.performSegue(withIdentifier: "resp4", sender: nil)
             }
         }
     }
@@ -187,10 +197,8 @@ class ViewControllerPregunta: UIViewController {
             break;
         }
         
-        print(resCorrecta!)
-        print(respuestabt!)
-        
         if respuestabt == resCorrecta{
+            preCorrectas += 1
             bt3.layer.backgroundColor = UIColor.green.withAlphaComponent(0.5).cgColor
             let generator = UINotificationFeedbackGenerator()
             generator.notificationOccurred(.success)
@@ -204,15 +212,20 @@ class ViewControllerPregunta: UIViewController {
         bt2.isEnabled = false
         bt3.isEnabled = false
         bt4.isEnabled = false
-        cont += 1
         //Delay
+       print(cont)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.cont += 1
             self.bt1.isEnabled = true
             self.bt2.isEnabled = true
             self.bt3.isEnabled = true
             self.bt4.isEnabled = true
+            print(self.cont)
             if self.cont < 4 {
                 self.newQuestion()
+            }
+            else{
+                self.performSegue(withIdentifier: "resp4", sender: nil)
             }
         }
     }
@@ -237,6 +250,7 @@ class ViewControllerPregunta: UIViewController {
         }
 
         if respuestabt == resCorrecta{
+            preCorrectas += 1
             bt4.layer.backgroundColor = UIColor.green.withAlphaComponent(0.5).cgColor
             let generator = UINotificationFeedbackGenerator()
             generator.notificationOccurred(.success)
@@ -250,14 +264,19 @@ class ViewControllerPregunta: UIViewController {
         bt2.isEnabled = false
         bt3.isEnabled = false
         bt4.isEnabled = false
-        cont += 1
+        print(cont)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.bt1.isEnabled = true
             self.bt2.isEnabled = true
             self.bt3.isEnabled = true
             self.bt4.isEnabled = true
+            print(self.cont)
+            self.cont += 1
             if self.cont < 4 {
                 self.newQuestion()
+            }
+            else{
+                self.performSegue(withIdentifier: "resp4", sender: nil)
             }
         }
     }
@@ -311,7 +330,7 @@ class ViewControllerPregunta: UIViewController {
     
     //Checa que no haga el segue si aun no pasan todas las preguntas
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if cont < 3{
+        if cont <= 3{
             return false
         }
         return true
@@ -322,8 +341,9 @@ class ViewControllerPregunta: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        
+        let vistaRes = segue.destination as! ViewControllerResultado
+        vistaRes.preCorrectas = preCorrectas
     }
     
     //MARK:- Constrains

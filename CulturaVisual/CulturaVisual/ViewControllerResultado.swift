@@ -12,6 +12,7 @@ class ViewControllerResultado: UIViewController, UITableViewDelegate, UITableVie
     
     let shapeLayer = CAShapeLayer()
     
+    var preCorrectas : Int!
     var pulsatingLayer : CAShapeLayer!
 
     
@@ -32,7 +33,7 @@ class ViewControllerResultado: UIViewController, UITableViewDelegate, UITableVie
         let center = CGPoint(x: self.view.bounds.midX, y: 260)
         
         let trackLayer = CAShapeLayer()
-        let circularPath = UIBezierPath(arcCenter: .zero, radius: 90, startAngle: -CGFloat.pi / 2, endAngle: 2 * CGFloat.pi, clockwise: true)
+        let circularPath = UIBezierPath(arcCenter: .zero, radius: 90, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
         
         //Animacion de pulso de fondo
         pulsatingLayer = CAShapeLayer()
@@ -57,6 +58,8 @@ class ViewControllerResultado: UIViewController, UITableViewDelegate, UITableVie
         
         
         // Circulo animado
+        let percentage = CGFloat(preCorrectas) / CGFloat(4)
+        print(percentage)
         shapeLayer.path = circularPath.cgPath
         shapeLayer.strokeColor = #colorLiteral(red: 0.2619800568, green: 0.5278556943, blue: 0.8930467367, alpha: 1)
         shapeLayer.lineWidth = 18
@@ -64,12 +67,14 @@ class ViewControllerResultado: UIViewController, UITableViewDelegate, UITableVie
         shapeLayer.lineCap = .round
         shapeLayer.strokeEnd = 0
         shapeLayer.position = center
+        shapeLayer.transform = CATransform3DMakeRotation(-CGFloat.pi / 2, 0, 0, 1)
+        lbCalificacion.text = "\(Int(percentage * 100))%"
         
         view.layer.addSublayer(shapeLayer)
         
         // Crea la animacion del circulo
         let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        basicAnimation.toValue = 0.9
+        basicAnimation.toValue = percentage
         basicAnimation.duration = 2
         basicAnimation.fillMode = .forwards
         basicAnimation.isRemovedOnCompletion = false
@@ -112,6 +117,10 @@ class ViewControllerResultado: UIViewController, UITableViewDelegate, UITableVie
 
     }
     
+    
+    
+    
+    
     // MARK:- Constrains
     //=============================
     func setUpLayout(){
@@ -129,7 +138,7 @@ class ViewControllerResultado: UIViewController, UITableViewDelegate, UITableVie
         lbRes.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         //Constrains label calificacion
-        lbCalificacion.topAnchor.constraint(equalTo: lbRes.bottomAnchor, constant: 140).isActive = true
+        lbCalificacion.topAnchor.constraint(equalTo: lbRes.bottomAnchor, constant: 90).isActive = true
         lbCalificacion.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         //Constrains del tableview
