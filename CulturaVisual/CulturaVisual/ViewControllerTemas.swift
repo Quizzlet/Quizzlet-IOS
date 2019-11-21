@@ -113,6 +113,7 @@ class ViewControllerTemas: UIViewController, UITableViewDataSource, UITableViewD
         
         vistaQuiz.Subject = GroupDetails.strSubjects[indexPath.row]
         vistaQuiz.UserData = UserData
+        vistaQuiz.strIdGroup = GroupDetails._id
     }
 
     //MARK: - Layout
