@@ -292,6 +292,7 @@ class ViewControllerPregunta: UIViewController {
                 newQuestion()
             }
             else{
+                self.performSegue(withIdentifier: "resp1", sender: nil)
                 timer.invalidate()
             }
             
