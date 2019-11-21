@@ -13,11 +13,11 @@ class ViewControllerGrupos:
     UITableViewDelegate,
     UITableViewDataSource,
     UIPopoverPresentationControllerDelegate {
+    
+    var UserData: User!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     //MARK: - Table Methods
@@ -49,6 +49,7 @@ class ViewControllerGrupos:
         if(segue.identifier == "PopUp") {
             let vistaPopOver = segue.destination as! ViewControllerPop
             vistaPopOver.popoverPresentationController?.delegate = self
+            vistaPopOver.UserData = UserData
         }
     }
 }

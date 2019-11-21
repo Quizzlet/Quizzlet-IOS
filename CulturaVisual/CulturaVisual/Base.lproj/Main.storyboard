@@ -448,7 +448,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add"/>
                                 <connections>
-                                    <action selector="popoverPresentationControllerDidDismissPopoverWithPopoverPresentationController:" destination="Ydr-Vv-AxS" eventType="touchUpInside" id="FFt-Uc-skL"/>
+                                    <action selector="AddGroup:" destination="Ydr-Vv-AxS" eventType="touchUpInside" id="fdT-ha-VdZ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -456,6 +456,9 @@
                         <viewLayoutGuide key="safeArea" id="rBv-7Y-bZi"/>
                     </view>
                     <size key="freeformSize" width="200" height="200"/>
+                    <connections>
+                        <outlet property="tfGroup" destination="C6z-FT-gkg" id="ZzK-fg-iEw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kcD-7A-wad" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -48311,7 +48314,6 @@ AAAAAAAAAAAAAAArfqY
         </image>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nq6-ak-xuZ"/>
         <segue reference="bad-Dr-kcJ"/>
         <segue reference="rjM-LB-drN"/>
     </inferredMetricsTieBreakers>
