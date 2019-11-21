@@ -259,17 +259,32 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HfI-sJ-bqb">
-                                <rect key="frame" x="92" y="333" width="190" height="85"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Maggie Jimenez" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTe-hf-8RG">
+                                <rect key="frame" x="16" y="572" width="212" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.74117647058823533" green="0.92549019607843142" blue="0.71372549019607845" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="25"/>
-                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Perfil">
+                                <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="A00821428" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Pt-bI-BhA">
+                                <rect key="frame" x="16" y="612" width="172" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnX-FE-q64">
+                                <rect key="frame" x="252" y="594" width="96" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.52941176469999995" green="0.80784313730000001" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="20"/>
+                                <state key="normal" title="Log Out">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <segue destination="ohk-r7-JY7" kind="show" identifier="Perfil" id="u1D-KM-C69"/>
+                                    <action selector="LogOut:" destination="ohk-r7-JY7" eventType="touchUpInside" id="MAh-8v-Qaf"/>
+                                    <action selector="logOut:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gtC-Fe-7Y1"/>
+                                    <segue destination="Nlb-lp-J3G" kind="presentation" modalPresentationStyle="fullScreen" id="q32-Kz-63x"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -279,21 +294,23 @@
                     <navigationItem key="navigationItem" id="UNx-B7-M3q"/>
                     <connections>
                         <outlet property="btCreditos" destination="VJt-ow-APc" id="rcS-gh-zPg"/>
-                        <outlet property="btPerfil" destination="HfI-sJ-bqb" id="XcB-i8-h85"/>
+                        <outlet property="btLogOut" destination="tnX-FE-q64" id="fnS-cn-gWt"/>
                         <outlet property="btTemas" destination="AVo-Df-3w6" id="0tT-kG-hrU"/>
+                        <outlet property="lbMatricula" destination="9Pt-bI-BhA" id="kQH-XA-mah"/>
+                        <outlet property="lbNombre" destination="lTe-hf-8RG" id="xF4-F7-rHR"/>
                         <outlet property="lbQuizzlet" destination="LQR-qK-nlJ" id="Qgi-pe-ACx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3572" y="125"/>
+            <point key="canvasLocation" x="3572" y="124.58770614692655"/>
         </scene>
         <!--View Controller Temas-->
         <scene sceneID="aAs-UH-fGC">
             <objects>
                 <viewController id="3vL-9A-W8D" customClass="ViewControllerTemas" customModule="CulturaVisual" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2DR-ws-jQd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Temas" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yH0-fu-T2G">
@@ -397,7 +414,6 @@
                                 <state key="normal" title="Log Out"/>
                                 <connections>
                                     <action selector="LogOut:" destination="ohk-r7-JY7" eventType="touchUpInside" id="nSi-tl-KeX"/>
-                                    <segue destination="Nlb-lp-J3G" kind="presentation" modalPresentationStyle="fullScreen" id="rjM-LB-drN"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -469,7 +485,7 @@
             <objects>
                 <viewController id="wav-Jd-sYu" customClass="ViewControllerQuizzes" customModule="CulturaVisual" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xVp-Qx-ciC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tdk-NH-bRZ">
@@ -530,7 +546,7 @@
             <objects>
                 <viewController id="aru-Gu-30L" customClass="ViewControllerPregunta" customModule="CulturaVisual" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NZJ-fb-2EP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pregunta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="04U-24-RtV">
@@ -671,7 +687,7 @@
             <objects>
                 <viewController id="NUQ-XO-LrI" customClass="ViewControllerResultado" customModule="CulturaVisual" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nTU-NY-Ln5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Resultado" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ppj-uM-pDn">
@@ -736,7 +752,7 @@
             <objects>
                 <viewController id="iOJ-Xm-aAu" customClass="ViewControllerGrupos" customModule="CulturaVisual" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tht-OH-3bb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Grupos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTl-b0-NTX">
@@ -48324,6 +48340,6 @@ AAAAACt+ww
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="bad-Dr-kcJ"/>
-        <segue reference="rjM-LB-drN"/>
+        <segue reference="q32-Kz-63x"/>
     </inferredMetricsTieBreakers>
 </document>
