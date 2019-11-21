@@ -11,7 +11,7 @@ import UIKit
 //==========================================================
 class QuestionAPI: NSObject {
     
-    static let shared = SubjectAPI()
+    static let shared = QuestionAPI()
     public static var BaseURL =
     "https://quizzlet.herokuapp.com/api/questions";
     

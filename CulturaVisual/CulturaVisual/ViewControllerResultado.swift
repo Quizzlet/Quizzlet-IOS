@@ -16,7 +16,12 @@ class ViewControllerResultado: UIViewController, UITableViewDelegate, UITableVie
     var pulsatingLayer : CAShapeLayer!
     var gradientLayer : CAGradientLayer!
     
-    
+    var UserData: User!
+    var strIdGroup: String!
+    var strIdQuiz : String!
+    var strIdTema : String!
+    var percentage : CGFloat!
+    var preTotales : Int!
 
     
     @IBOutlet weak var tableView: UITableView!
@@ -25,13 +30,14 @@ class ViewControllerResultado: UIViewController, UITableViewDelegate, UITableVie
     
     @IBOutlet weak var lbTop: UILabel!
     
-    
-    var top5 = ["Ana", "Maggie", "Angel", "Noe", "Mariana"]
+    var top5 : [Grade] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
     self.navigationController?.isNavigationBarHidden = true
         setUpLayout()
+        percentage = CGFloat(preCorrectas) / CGFloat(preTotales)
+        postGrade()
         
         let center = CGPoint(x: self.view.bounds.midX, y: 260)
         
@@ -61,8 +67,6 @@ class ViewControllerResultado: UIViewController, UITableViewDelegate, UITableVie
         
         
         // Circulo animado
-        let percentage = CGFloat(preCorrectas) / CGFloat(4)
-        print(percentage)
         shapeLayer.path = circularPath.cgPath
         shapeLayer.strokeColor = #colorLiteral(red: 0.2619800568, green: 0.5278556943, blue: 0.8930467367, alpha: 1)
         shapeLayer.lineWidth = 18
@@ -109,6 +113,68 @@ class ViewControllerResultado: UIViewController, UITableViewDelegate, UITableVie
         navigationController?.popToRootViewController(animated: true)
     }
     
+    func postGrade(){
+        GradesAPI.shared.postGrade(
+            strIdGroup: strIdGroup,
+            strIdSubject: strIdTema,
+            strIdQuiz: strIdQuiz,
+            intGrade: Int(percentage * 100),
+            user: UserData
+        ) { (res) in
+            switch res{
+            case .failure(let err as NSError):
+                //manejar errores
+                var ErrorCode: String = "";
+                var ErrorMessage: String = "";
+                if(
+                    //Client error
+                    err.code >= 400 &&
+                    err.code < 600
+                    ){
+                    ErrorCode = "\(err.code)"
+                    ErrorMessage = err.userInfo["message"]! as! String
+                } else {
+                    ErrorMessage = err.localizedDescription;
+                }
+                
+                self.showAlert(
+                    strType: "Error",
+                    strCode: ErrorCode,
+                    strMessage: ErrorMessage
+                )
+            case .success(let res):
+                //igual arreglo para desplegar tabla de grades
+                print(res[0].strName)
+                self.top5 = res
+                self.tableView.reloadData()
+            }
+        }
+        
+    }
+            
+    
+
+    func showAlert(
+        strType: String,
+        strCode: String,
+        strMessage: String
+    ) {
+        let alert = UIAlertController(
+            title: strType,
+            message: strMessage,
+            preferredStyle: .alert
+        )
+        
+        let action = UIAlertAction(
+            title: "Ok",
+            style: .cancel,
+            handler: nil
+        )
+        alert.addAction(action)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+            
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         top5.count
     }
@@ -116,16 +182,14 @@ class ViewControllerResultado: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "celda", for: indexPath)
         
-        cell.textLabel?.text = top5[indexPath.row]
+        cell.textLabel?.text = top5[indexPath.row].strName
+        cell.detailTextLabel?.text = top5[indexPath.row].intGrade
         
         return cell
 
     }
     
-    
-    
-    
-    
+
     // MARK:- Constrains
     //=============================
     func setUpLayout(){

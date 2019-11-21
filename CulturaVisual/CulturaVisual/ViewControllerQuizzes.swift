@@ -104,6 +104,16 @@ class ViewControllerQuizzes: UIViewController, UITableViewDelegate, UITableViewD
         return CGFloat(70)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vistaPregunta = segue.destination as! ViewControllerPregunta
+        let indexPath = tableView.indexPathForSelectedRow!
+        
+        vistaPregunta.quiz = SubjectDetails.arrQuizzes[indexPath.row]
+        vistaPregunta.UserData = UserData
+        vistaPregunta.strIdGroup = strIdGroup
+        vistaPregunta.strIdTema = Subject._id
+    }
+    
     //MARK:- Constrains
     //------------------------------------------------------
     func setUpLayout(){
