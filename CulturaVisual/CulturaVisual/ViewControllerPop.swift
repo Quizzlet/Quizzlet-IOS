@@ -91,14 +91,6 @@ class ViewControllerPop: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    // MARK: - Navigation
-    //------------------------------------------------------
-    override func prepare(
-        for segue: UIStoryboardSegue,
-        sender: Any?
-    ) {
-        
-    }
     
     //------------------------------------------------------
     @IBAction func popoverPresentationControllerDidDismissPopover(
