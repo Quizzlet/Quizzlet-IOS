@@ -16,7 +16,7 @@ class UserAPI: NSObject {
     public static var BaseURL =
         "https://quizzlet.herokuapp.com/api/users";
     
-    //MARK: - Login
+    // MARK: - Login
     //------------------------------------------------------
     func Login(
         //Data to send

@@ -21,6 +21,10 @@
 		0BB7599323866BDC00C83AD5 /* SubjectAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB7599223866BDC00C83AD5 /* SubjectAPI.swift */; };
 		0BB7599523867D2300C83AD5 /* QuizDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB7599423867D2300C83AD5 /* QuizDetails.swift */; };
 		0BB7599723867DFB00C83AD5 /* QuizAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB7599623867DFB00C83AD5 /* QuizAPI.swift */; };
+		0BB9C1392386DCDB0094E4EB /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB9C1382386DCDB0094E4EB /* Question.swift */; };
+		0BB9C13B2386DE130094E4EB /* QuestionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB9C13A2386DE130094E4EB /* QuestionAPI.swift */; };
+		0BB9C13D2386E33D0094E4EB /* Grade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB9C13C2386E33D0094E4EB /* Grade.swift */; };
+		0BB9C13F2386E3930094E4EB /* GradesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB9C13E2386E3930094E4EB /* GradesAPI.swift */; };
 		36EF801D236CFA8A00BE403F /* ViewControllerPregunta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EF801C236CFA8A00BE403F /* ViewControllerPregunta.swift */; };
 		36EF801F236D12C800BE403F /* ViewControllerResultado.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EF801E236D12C800BE403F /* ViewControllerResultado.swift */; };
 		36FB4D7123539FD2004BEBCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FB4D7023539FD2004BEBCD /* AppDelegate.swift */; };
@@ -50,6 +54,10 @@
 		0BB7599223866BDC00C83AD5 /* SubjectAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectAPI.swift; sourceTree = "<group>"; };
 		0BB7599423867D2300C83AD5 /* QuizDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizDetails.swift; sourceTree = "<group>"; };
 		0BB7599623867DFB00C83AD5 /* QuizAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizAPI.swift; sourceTree = "<group>"; };
+		0BB9C1382386DCDB0094E4EB /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		0BB9C13A2386DE130094E4EB /* QuestionAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAPI.swift; sourceTree = "<group>"; };
+		0BB9C13C2386E33D0094E4EB /* Grade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grade.swift; sourceTree = "<group>"; };
+		0BB9C13E2386E3930094E4EB /* GradesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradesAPI.swift; sourceTree = "<group>"; };
 		36EF801C236CFA8A00BE403F /* ViewControllerPregunta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerPregunta.swift; sourceTree = "<group>"; };
 		36EF801E236D12C800BE403F /* ViewControllerResultado.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerResultado.swift; sourceTree = "<group>"; };
 		36FB4D6D23539FD2004BEBCD /* CulturaVisual.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CulturaVisual.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +95,8 @@
 				0BB7598E23866A4200C83AD5 /* Quiz.swift */,
 				0BB7599023866B3200C83AD5 /* SubjectDetails.swift */,
 				0BB7599423867D2300C83AD5 /* QuizDetails.swift */,
+				0BB9C1382386DCDB0094E4EB /* Question.swift */,
+				0BB9C13C2386E33D0094E4EB /* Grade.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -98,6 +108,8 @@
 				0BB759842385EC5700C83AD5 /* GroupsAPI.swift */,
 				0BB7599223866BDC00C83AD5 /* SubjectAPI.swift */,
 				0BB7599623867DFB00C83AD5 /* QuizAPI.swift */,
+				0BB9C13A2386DE130094E4EB /* QuestionAPI.swift */,
+				0BB9C13E2386E3930094E4EB /* GradesAPI.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -219,10 +231,14 @@
 				0B47BCD5235511180052C609 /* UserAPI.swift in Sources */,
 				36FB4D7323539FD2004BEBCD /* ViewController.swift in Sources */,
 				0BB7598923863CA200C83AD5 /* GroupDetails.swift in Sources */,
+				0BB9C13D2386E33D0094E4EB /* Grade.swift in Sources */,
+				0BB9C13F2386E3930094E4EB /* GradesAPI.swift in Sources */,
 				0BB7599323866BDC00C83AD5 /* SubjectAPI.swift in Sources */,
+				0BB9C13B2386DE130094E4EB /* QuestionAPI.swift in Sources */,
 				0BB7598723861F7200C83AD5 /* Group.swift in Sources */,
 				0BB759852385EC5700C83AD5 /* GroupsAPI.swift in Sources */,
 				36EF801F236D12C800BE403F /* ViewControllerResultado.swift in Sources */,
+				0BB9C1392386DCDB0094E4EB /* Question.swift in Sources */,
 				36FB4D872353C060004BEBCD /* ViewControllerQuizzes.swift in Sources */,
 				0B6E88422354B5FB00E9F984 /* ViewControllerSingUp.swift in Sources */,
 				36FB4D892353FCF9004BEBCD /* ViewControllerLogin.swift in Sources */,
